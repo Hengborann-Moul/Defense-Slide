@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>Research Flow Diagram</title>
+  <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+  <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .pipeline {
+      display: flex; flex-direction: column; gap: 14px;
+      align-items: center;
+    }
+    .pipe-row {
+      display: flex; align-items: center; gap: 0;
+    }
+    .step-card {
+      width: 165px; height: 96px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px 8px 10px;
+      display: flex; flex-direction: column;
+      position: relative;
+      box-shadow: 0 1px 2px rgba(15,31,61,0.04);
+    }
+    .step-card .num {
+      font-family: var(--font-num); font-size: 16px; font-weight: 700;
+      letter-spacing: 0.12em; color: var(--accent);
+    }
+    .step-card .top {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .step-card .icon {
+      color: var(--primary-soft); font-size: 24px;
+    }
+    .step-card .lbl {
+      font-family: var(--font-heading); font-size: 14px; font-weight: 700;
+      color: var(--primary-soft); margin-top: 2px; letter-spacing: -0.005em;
+    }
+    .step-card .desc {
+      font-family: var(--font-body); font-size: 10px; color: var(--text-muted);
+      line-height: 1.32; margin-top: 2px;
+    }
+    .chev {
+      font-family: var(--font-num); font-size: 22px; font-weight: 600;
+      color: var(--accent); padding: 0 6px;
+      line-height: 96px;
+    }
+    .chev-row2 {
+      transform: scaleX(-1);
+    }
+    .wrap-back {
+      align-self: stretch;
+      display: flex; align-items: center; justify-content: left;
+      color: var(--accent);
+      font-family: var(--font-num);
+      font-size: 18px;
+      padding: 0 0 6px 0;
+    }
+    .bottom-card {
+      background: var(--bg-soft);
+      border-radius: 10px;
+      border-left: 3px solid var(--accent);
+      padding: 14px 18px;
+    }
+    .bottom-card h4 {
+      font-family: var(--font-heading); font-size: 13px; font-weight: 700;
+      color: var(--primary-soft); letter-spacing: 0.04em; text-transform: uppercase;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bottom-card ul {
+      margin-top: 8px; padding: 0; list-style: none;
+    }
+    .bottom-card li {
+      font-family: var(--font-body); font-size: 11.5px; color: var(--text-muted);
+      line-height: 1.55; padding-left: 16px; position: relative;
+    }
+    .bottom-card li::before {
+      content: '·'; position: absolute; left: 4px; top: -2px;
+      color: var(--accent); font-weight: 700; font-size: 16px;
+    }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.mb-1{margin-bottom:0.25rem}.mt-1\.5{margin-top:0.375rem}.mt-4{margin-top:1rem}.grid{display:grid}.hidden{display:none}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.gap-4{gap:1rem}</style></head>
+<body>
+  <div class="slide" style="box-sizing: border-box; width: 1280px;">
+
+      <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
+
+    <div class="eyebrow">METHODOLOGY · END-TO-END PIPELINE</div>
+    <div class="accent-bar" style="margin-top:8px;"></div>
+    <h1 class="headline">From Raw Video to Trained Classifier in Twelve Stages</h1>
+    <p class="subhead">Each stage has clear input-output specifications, enabling modular testing and independent optimization — the pipeline prioritizes computational efficiency at every stage.</p>
+
+    <!-- Pipeline -->
+    <div class="pipeline mt-4">
+      <div class="pipe-row">
+        <div class="step-card">
+          <div class="top"><span class="num">01</span><i class="material-icons icon">videocam</i></div>
+          <div class="lbl">DAiSEE</div>
+          <div class="desc">Raw video input · 30 fps clips from 112 participants</div>
+        </div>
+        <span class="chev">›</span>
+        <div class="step-card">
+          <div class="top"><span class="num">02</span><i class="material-icons icon">compress</i></div>
+          <div class="lbl">Label Transform</div>
+          <div class="desc">4-Class → 3-Class · state-specific mapping</div>
+        </div>
+        <span class="chev">›</span>
+        <div class="step-card">
+          <div class="top"><span class="num">03</span><i class="material-icons icon">face</i></div>
+          <div class="lbl">MediaPipe</div>
+          <div class="desc">78D per frame · blendshapes + pose + gaze</div>
+        </div>
+        <span class="chev">›</span>
+        <div class="step-card">
+          <div class="top"><span class="num">04</span><i class="material-icons icon">view_column</i></div>
+          <div class="lbl">Sequence</div>
+          <div class="desc">150 × 78 matrix · uniform downsample</div>
+        </div>
+        <span class="chev">›</span>
+        <div class="step-card">
+          <div class="top"><span class="num">05</span><i class="material-icons icon">tune</i></div>
+          <div class="lbl">Normalize</div>
+          <div class="desc">5 strategies per type · training stats only</div>
+        </div>
+        <span class="chev">›</span>
+        <div class="step-card">
+          <div class="top"><span class="num">06</span><i class="material-icons icon">account_tree</i></div>
+          <div class="lbl">Feature Eng.</div>
+          <div class="desc">~2,152 features · 5 categories</div>
+        </div>
+      </div>
+
+      <div class="wrap-back" data-decor="" aria-hidden="true">
+        <i class="material-icons" style="font-size: 18px;">subdirectory_arrow_right</i>
+      </div>
+
+      <div class="pipe-row">
+        <div class="step-card">
+          <div class="top"><span class="num">07</span><i class="material-icons icon">filter_alt</i></div>
+          <div class="lbl">Selection</div>
+          <div class="desc">Top 500 features · XGBoost + LASSO</div>
+        </div>
+        <span class="chev">›</span>
+        <div class="step-card">
+          <div class="top"><span class="num">08</span><i class="material-icons icon">call_split</i></div>
+          <div class="lbl">Split</div>
+          <div class="desc">80/10/10 stratified · seed=42</div>
+        </div>
+        <span class="chev">›</span>
+        <div class="step-card">
+          <div class="top"><span class="num">09</span><i class="material-icons icon">balance</i></div>
+          <div class="lbl">Imbalance</div>
+          <div class="desc">SMOTE + weights + Focal Loss</div>
+        </div>
+        <span class="chev">›</span>
+        <div class="step-card">
+          <div class="top"><span class="num">10</span><i class="material-icons icon">park</i></div>
+          <div class="lbl">XGBoost</div>
+          <div class="desc">4 independent models · depth=8, lr=0.05</div>
+        </div>
+        <span class="chev">›</span>
+        <div class="step-card">
+          <div class="top"><span class="num">11</span><i class="material-icons icon">trending_up</i></div>
+          <div class="lbl">Calibrate</div>
+          <div class="desc">Isotonic regression · threshold [0.2, 0.8]</div>
+        </div>
+        <span class="chev">›</span>
+        <div class="step-card" style="border-color: var(--accent); background: rgba(20,184,166,0.06);">
+          <div class="top"><span class="num">12</span><i class="material-icons icon" style="color: var(--accent-deep);">output</i></div>
+          <div class="lbl">Output</div>
+          <div class="desc">4×3 probability matrix · Low/Med/High per state</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom accent cards -->
+    <div class="grid grid-cols-2 gap-4 mt-4">
+      <div class="bottom-card">
+        <h4><i class="material-icons" style="font-size: 16px; color: var(--accent);">storage</i> Data Handling</h4>
+        <ul>
+          <li>80/10/10 train/val/test split</li>
+          <li>Label transformation: 4 levels → 3 actionable classes</li>
+          <li>Imbalance handled via class weighting + sampling + post-training threshold optimization</li>
+        </ul>
+      </div>
+      <div class="bottom-card">
+        <h4><i class="material-icons" style="font-size: 16px; color: var(--accent);">model_training</i> Training &amp; Evaluation</h4>
+        <ul>
+          <li>XGBoost with depth/learning-rate scan</li>
+          <li>5-fold cross-validation on training fold</li>
+          <li>Per-class Precision, Recall, F1, Accuracy reported</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>Efficient Attention Classification</span>
+      <span class="pageno">13 / 34</span>
+    </footer>
+  </div>
+
+  <aside data-notes="" class="hidden">The pipeline is twelve stages. We start with raw DAiSEE video at stage one, collapse the four intensity labels to three actionable classes at stage two, extract 78 dimensions per frame with MediaPipe at stage three, build a uniform 150-by-78 matrix at stage four, normalize with five type-specific strategies at stage five, and engineer roughly 2,152 features in five categories at stage six. Stages three, four and five are the topic of slides 14 and 15, and stage six is slide 16. Stage seven then selects the top 500 features via XGBoost plus LASSO; stages nine, ten and eleven — SMOTE, XGBoost training, and isotonic calibration — are slide 18. The pipeline is fully modular: each stage can be swapped independently without rewriting the others.</aside>
+
+
+</body></html>

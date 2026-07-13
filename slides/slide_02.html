@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<title>Agenda · Efficient Attention Classification</title>
+<link rel="stylesheet" href="global.css">
+<link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+<style>
+  .agenda-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
+    gap:20px;
+    flex:1;
+    margin-top:18px;
+  }
+  .agenda-card{
+    position:relative;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:24px 26px 22px 26px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    transition:none;
+  }
+  .agenda-card .num{
+    font-family:var(--font-num);font-size:54px;font-weight:700;
+    color:var(--accent);line-height:1;letter-spacing:-0.04em;
+  }
+  .agenda-card .title{
+    font-family:var(--font-heading);font-size:24px;font-weight:700;
+    color:var(--primary);line-height:1.15;letter-spacing:-0.01em;
+    margin-top:14px;
+  }
+  .agenda-card .desc{
+    font-family:var(--font-body);font-size:13.5px;font-weight:400;
+    color:var(--text-muted);line-height:1.5;
+    margin-top:6px;max-width:380px;
+  }
+  .agenda-card .meta-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-top:14px;
+  }
+  .agenda-card .slide-chip{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:4px 10px;border-radius:999px;
+    background:var(--bg-tint);color:var(--primary);
+    font-family:var(--font-num);font-size:11px;font-weight:600;
+    letter-spacing:0.06em;border:1px solid var(--border);
+  }
+  .agenda-card .flag{
+    color:var(--warn);font-size:20px;
+  }
+  .agenda-card .accent-rule{
+    position:absolute;left:26px;right:26px;top:0;height:3px;
+    background:var(--accent);border-radius:0 0 2px 2px;
+  }
+  .agenda-card.flagged .accent-rule{ background:var(--warn); }
+</style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.hidden{display:none}</style></head>
+<body>
+<div class="slide" style="box-sizing: border-box; width: 1280px;">
+
+    <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
+
+  <div class="eyebrow">AGENDA</div>
+  <div class="accent-bar" style="margin-top:8px;"></div>
+  <h1 class="headline">Outline of the Defense</h1>
+  <p class="subhead">Four sections, twenty-six content slides, ten minutes of presentation followed by Q&amp;A.</p>
+
+  <div class="agenda-grid">
+
+    <!-- 01 -->
+    <article class="agenda-card">
+      <div class="accent-rule" data-decor="" aria-hidden="true"></div>
+      <div class="">
+        <div class="num">01</div>
+        <div class="title">Introduction</div>
+        <div class="desc">Motivation, prior work, objectives, and research questions.</div>
+      </div>
+      <div class="meta-row">
+        <span class="material-icons" style="color:var(--text-soft);font-size:18px;">menu_book</span>
+        <span class="slide-chip">7 slides</span>
+      </div>
+    </article>
+
+    <!-- 02 -->
+    <article class="agenda-card">
+      <div class="accent-rule" data-decor="" aria-hidden="true"></div>
+      <div>
+        <div class="num">02</div>
+        <div class="title">Methodology</div>
+        <div class="desc">DAiSEE dataset, MediaPipe feature pipeline, feature engineering, XGBoost model.</div>
+      </div>
+      <div class="meta-row">
+        <span class="material-icons" style="color:var(--text-soft);font-size:18px;">precision_manufacturing</span>
+        <span class="slide-chip">7 slides</span>
+      </div>
+    </article>
+
+    <!-- 03 -->
+    <article class="agenda-card">
+      <div class="accent-rule" data-decor="" aria-hidden="true"></div>
+      <div class="">
+        <div class="num">03</div>
+        <div class="title">Results &amp; Discussion</div>
+        <div class="desc">Numerical performance, per-class breakdown, SHAP analysis, ablation.</div>
+      </div>
+      <div class="meta-row">
+        <span class="material-icons" style="color:var(--text-soft);font-size:18px;">insights</span>
+        <span class="slide-chip">9 slides</span>
+      </div>
+    </article>
+
+    <!-- 04 (flagged) -->
+    <article class="agenda-card flagged">
+      <div class="accent-rule" data-decor="" aria-hidden="true"></div>
+      <div>
+        <div class="num" style="color:var(--warn);">04</div>
+        <div class="title">Conclusion &amp; Future Work</div>
+        <div class="desc">Limitations, contributions, and next steps.</div>
+      </div>
+      <div class="meta-row">
+        <span class="material-icons flag" title="Final section">flag</span>
+        <span class="slide-chip">3 slides</span>
+      </div>
+    </article>
+
+  </div>
+
+  <footer class="slide-footer">
+    <span class="">Efficient Attention Classification</span>
+    <span class="pageno">02 / 34</span>
+  </footer>
+</div>
+
+<aside data-notes="" class="hidden">
+This slide outlines the four sections of today's defense. We will begin with the Introduction, where I will cover the motivation, prior work on the DAiSEE benchmark, our explicit research objectives, and the three research questions this thesis answers. The Methodology section that follows will be the most detailed part of the talk, walking through the DAiSEE dataset, the MediaPipe feature extraction pipeline, our hand-crafted feature engineering, and the XGBoost model design. After that, Results and Discussion will present numerical performance, per-class breakdown, SHAP-based interpretability, and an ablation study. Finally, the Conclusion will cover limitations, contributions, and future work. The full presentation runs about ten minutes, with Q&amp;A afterward. Please feel free to interrupt at any time with questions.
+</aside>
+
+
+</body></html>

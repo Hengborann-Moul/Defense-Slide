@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>Facial Feature Extraction — MediaPipe 78D</title>
+  <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+  <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .feat-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px 12px 14px;
+      position: relative;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .feat-card::after {
+      content: ''; position: absolute; left: 0; top: 0; right: 0;
+      height: 3px; background: var(--accent);
+    }
+    .feat-card .chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 8px;
+      font-family: var(--font-body); font-size: 9.5px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--bg-tint); color: var(--primary);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      align-self: flex-start;
+    }
+    .feat-card .dim {
+      font-family: var(--font-num); font-size: 30px; font-weight: 700;
+      color: var(--accent-deep); letter-spacing: -0.02em;
+      line-height: 1; margin-top: 8px;
+    }
+    .feat-card .cat {
+      font-family: var(--font-heading); font-size: 16px; font-weight: 700;
+      color: var(--primary-soft); margin-top: 6px;
+      letter-spacing: -0.005em;
+    }
+    .feat-card .desc {
+      font-family: var(--font-body); font-size: 14px; color: var(--text-muted);
+      line-height: 1.45; margin-top: 4px;
+    }
+    .sub-card {
+      background: var(--bg-soft);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .sub-card .kicker {
+      font-family: var(--font-body); font-size: 16px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent-deep);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .sub-card .row {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+    }
+    .sub-card .pill {
+      font-family: var(--font-num); font-size: 14px; font-weight: 500;
+      padding: 3px 8px; border-radius: 4px;
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--primary); letter-spacing: 0.02em;
+    }
+    .sub-card .pill.accent {
+      background: rgba(20,184,166,0.10); color: var(--accent-deep);
+      border-color: rgba(20,184,166,0.3);
+    }
+    .state-line {
+      font-family: var(--font-body); font-size: 14px; color: var(--text-muted);
+      line-height: 1.55; padding: 3px 0;
+    }
+    .state-line b { color: var(--primary); font-weight: 700; font-family: var(--font-heading); }
+    .throughput {
+      margin-top: 10px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 8px 16px;
+      display: flex; align-items: center; gap: 14px;
+      color: var(--primary);
+      font-family: var(--font-body); font-size: 14px; letter-spacing: 0.04em;
+    }
+    .throughput .label {
+      font-family: var(--font-body); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent-deep);
+    }
+    .throughput .metric {
+      font-family: var(--font-num); font-weight: 600;
+      color: var(--primary);
+    }
+    .throughput .sep { color: var(--text-muted); }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.mb-1{margin-bottom:0.25rem}.mt-1\.5{margin-top:0.375rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.grid{display:grid}.hidden{display:none}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.grid-cols-5{grid-template-columns:repeat(5, minmax(0, 1fr))}.gap-3{gap:0.75rem}</style></head>
+<body>
+  <div class="slide" style="box-sizing: border-box; width: 1280px;">
+
+      <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
+
+    <div class="eyebrow">METHODOLOGY · MEDIAPIPE 78D</div>
+    <div class="accent-bar" style="margin-top:8px;"></div>
+    <h1 class="headline">Facial Feature Extraction — 78 Dimensions Per Frame</h1>
+    <p class="subhead">MediaPipe Face Landmarker provides 468 landmarks + 52 blendshape coefficients. We compose them into a 78-dimensional per-frame vector organized into five semantic groups.</p>
+
+    <!-- Top: 5 cards -->
+    <div class="grid grid-cols-5 gap-3 mt-4">
+      <div class="feat-card">
+        <span class="chip"><i class="material-icons" style="font-size:11px;color:var(--accent);">face</i>Blendshapes</span>
+        <div class="dim">52D</div>
+        <div class="cat">Blendshapes</div>
+        <div class="desc">Per-AU facial muscle activations (eyebrow, eye, jaw, mouth, nose, cheek).</div>
+      </div>
+      <div class="feat-card">
+        <span class="chip"><i class="material-icons" style="font-size:11px;color:var(--accent);">3d_rotation</i>Head Pose</span>
+        <div class="dim">6D</div>
+        <div class="cat">Head Pose</div>
+        <div class="desc">Pitch, yaw, roll + 3D position. Normalized to [-1, 1].</div>
+      </div>
+      <div class="feat-card">
+        <span class="chip"><i class="material-icons" style="font-size:11px;color:var(--accent);">visibility</i>Eye Gaze</span>
+        <div class="dim">6D</div>
+        <div class="cat">Eye Gaze</div>
+        <div class="desc">Horizontal/vertical gaze for left, right, combined. Computed from blendshapes.</div>
+      </div>
+      <div class="feat-card">
+        <span class="chip"><i class="material-icons" style="font-size:11px;color:var(--accent);">hub</i>Composite</span>
+        <div class="dim">10D</div>
+        <div class="cat">Composite</div>
+        <div class="desc">Regional activity levels, symmetry, state-specific indicators.</div>
+      </div>
+      <div class="feat-card">
+        <span class="chip"><i class="material-icons" style="font-size:11px;color:var(--accent);">graphic_eq</i>Dynamics</span>
+        <div class="dim">4D</div>
+        <div class="cat">Dynamics</div>
+        <div class="desc">Animation level, expression intensity, active region count, facial tension.</div>
+      </div>
+    </div>
+
+    <!-- Bottom: 2 cards side-by-side -->
+    <div class="grid grid-cols-2 gap-3 mt-3">
+      <div class="sub-card">
+        <div class="kicker"><i class="material-icons" style="font-size:13px;">view_module</i>SEMANTIC SUB-GROUPS</div>
+        <div class="row">
+          <span class="pill">Eyebrow (idx 0–4)</span>
+          <span class="pill">Eye (8–21)</span>
+          <span class="pill">Jaw (21–24)</span>
+          <span class="pill">Mouth (25–49)</span>
+          <span class="pill">Nose (50–51)</span>
+          <span class="pill">Cheek (5–6)</span>
+        </div>
+      </div>
+      <div class="sub-card">
+        <div class="kicker"><i class="material-icons" style="font-size:13px;">psychology</i>STATE-SPECIFIC SUB-GROUPS</div>
+        <div class="state-line"><b>Boredom:</b> eyeBlink, eyeLookDown, jawOpen</div>
+        <div class="state-line"><b>Engagement:</b> eyeWide, browInnerUp, mouthSmile</div>
+        <div class="state-line"><b>Confusion:</b> browDown, eyeSquint, mouthFrown</div>
+        <div class="state-line"><b>Frustration:</b> browInnerUp, mouthPress, jawForward</div>
+      </div>
+    </div>
+
+    <!-- Throughput strip -->
+    <div class="throughput">
+      <span class="label"><i class="material-icons" style="font-size:13px; vertical-align: middle;">bolt</i> THROUGHPUT</span>
+      <span class="metric">30+ FPS</span>
+      <span class="sep">on a single CPU</span>
+      <span class="sep">·</span>
+      <span class="metric">78D</span>
+      <span class="sep">per frame</span>
+      <span class="sep">·</span>
+      <span class="metric">~3 ms</span>
+      <span class="sep">per frame including MediaPipe inference</span>
+    </div>
+
+    <footer class="slide-footer">
+      <span>Efficient Attention Classification</span>
+      <span class="pageno">15 / 34</span>
+    </footer>
+  </div>
+
+  <aside data-notes="" class="hidden">MediaPipe Face Landmarker gives us 468 landmarks and 52 blendshape coefficients per frame. We compose these into a 78-dimensional vector organized into five semantic groups. The first group is the 52 raw blendshapes, the per-action-unit facial muscle activations across eyebrow, eye, jaw, mouth, nose and cheek. The second is 6-D head pose — pitch, yaw, roll plus 3-D position. The third is 6-D eye gaze, computed from blendshapes. The fourth is a 10-D composite group that we engineer ourselves: regional activity levels, symmetry, and state-specific indicators — this is not raw MediaPipe output. The fifth is a 4-D dynamics group: animation level, expression intensity, active region count, and facial tension. The state-specific sub-groups encode our prior about which features should matter per state — the SHAP analysis on slides 22 to 25 will validate this empirically. Throughput is 30-plus frames per second on a single CPU, roughly 3 milliseconds per frame including MediaPipe inference.</aside>
+
+
+</body></html>

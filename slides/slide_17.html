@@ -1,0 +1,191 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>Feature Contribution to Affective States</title>
+  <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+  <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .state-col {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      height: 350px;
+    }
+    .state-band {
+      height: 6px;
+    }
+    .band-boredom { background: #4A5F8C; }
+    .band-engagement { background: var(--accent); }
+    .band-confusion { background: #C77B2C; }
+    .band-frustration { background: #A14545; }
+
+    .state-col .body {
+      padding: 14px 14px 12px 14px;
+      display: flex; flex-direction: column; gap: 8px;
+      flex: 1;
+    }
+    .state-name {
+      font-family: var(--font-display); font-size: 26px; font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .state-name.boredom { color: #4A5F8C; }
+    .state-name.engagement { color: var(--accent-deep); }
+    .state-name.confusion { color: #C77B2C; }
+    .state-name.frustration { color: #A14545; }
+
+    .state-def {
+      font-family: var(--font-body); font-size: 11px; font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+    .state-col .kicker {
+      font-family: var(--font-body); font-size: 9.5px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+    .feat-chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 8px;
+      font-family: var(--font-num); font-size: 10px; font-weight: 500;
+      background: var(--bg-tint); border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--primary); letter-spacing: 0.01em;
+    }
+    .feat-chip .material-icons { font-size: 11px; color: var(--accent); }
+    .feat-chips {
+      display: flex; flex-wrap: wrap; gap: 4px;
+    }
+    .signature {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      padding-top: 6px;
+      border-top: 1px solid var(--border-soft);
+      margin-top: 4px;
+    }
+    .signature b { color: var(--primary); font-weight: 700; }
+    .bridge-strip {
+      margin-top: 10px;
+      background: var(--bg-soft);
+      color: var(--primary);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 8px 16px;
+      display: flex; align-items: center; gap: 12px;
+      font-family: var(--font-body); font-size: 11.5px;
+      line-height: 1.5;
+    }
+    .bridge-strip .label {
+      font-family: var(--font-body); font-size: 9.5px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent-deep);
+      flex-shrink: 0;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .bridge-strip .text {
+      color: var(--text);
+    }
+    .bridge-strip .text b { color: var(--accent-deep); font-weight: 700; font-family: var(--font-num); }
+  </style>
+</head>
+<body>
+  <div class="slide">
+      <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
+    <div class="eyebrow">METHODOLOGY · FEATURE CONTRIBUTION</div>
+    <div class="accent-bar" style="margin-top:8px;"></div>
+    <h1 class="headline">How Each Feature Category Contributes to Each Affective State</h1>
+    <p class="subhead">Domain-specific sub-groups pre-define which signals we expect to drive each state. The SHAP analysis on slides 22-25 validates this mapping empirically — and reveals unexpected cross-state bridges.</p>
+
+    <!-- 4-column grid -->
+    <div class="grid grid-cols-4 gap-3 mt-3">
+      <!-- BOREDOM -->
+      <div class="state-col">
+        <div class="state-band band-boredom"></div>
+        <div class="body">
+          <div class="state-name boredom">Boredom</div>
+          <div class="state-def">Sustained disengagement</div>
+          <div class="kicker">Primary Features</div>
+          <div class="feat-chips">
+            <span class="feat-chip"><i class="material-icons">remove_red_eye</i>eyeBlink (L/R)</span>
+            <span class="feat-chip"><i class="material-icons">arrow_downward</i>eyeLookDown (L/R)</span>
+            <span class="feat-chip"><i class="material-icons">face</i>jawOpen</span>
+            <span class="feat-chip"><i class="material-icons">tag</i>boredom_indicator (idx 72)</span>
+          </div>
+          <div class="signature"><b>Expected signature:</b> Reduced facial animation, downward gaze drift, slow head roll, flat expression distribution (low kurtosis).</div>
+        </div>
+      </div>
+
+      <!-- ENGAGEMENT -->
+      <div class="state-col">
+        <div class="state-band band-engagement"></div>
+        <div class="body">
+          <div class="state-name engagement">Engagement</div>
+          <div class="state-def">Active attention</div>
+          <div class="kicker">Primary Features</div>
+          <div class="feat-chips">
+            <span class="feat-chip"><i class="material-icons">visibility</i>eyeWide (L/R)</span>
+            <span class="feat-chip"><i class="material-icons">arrow_upward</i>browInnerUp</span>
+            <span class="feat-chip"><i class="material-icons">sentiment_satisfied</i>mouthSmile (L/R)</span>
+            <span class="feat-chip"><i class="material-icons">tag</i>engagement_indicator (idx 73)</span>
+          </div>
+          <div class="signature"><b>Expected signature:</b> Active vertical gaze scanning, elevated eye activity peaks, coordinated multi-region expressiveness.</div>
+        </div>
+      </div>
+
+      <!-- CONFUSION -->
+      <div class="state-col">
+        <div class="state-band band-confusion"></div>
+        <div class="body">
+          <div class="state-name confusion">Confusion</div>
+          <div class="state-def">Cognitive overload</div>
+          <div class="kicker">Primary Features</div>
+          <div class="feat-chips">
+            <span class="feat-chip"><i class="material-icons">arrow_downward</i>browDown (L/R)</span>
+            <span class="feat-chip"><i class="material-icons">visibility_off</i>eyeSquint (L/R)</span>
+            <span class="feat-chip"><i class="material-icons">mood_bad</i>mouthFrown (L/R)</span>
+            <span class="feat-chip"><i class="material-icons">tag</i>confusion_indicator (idx 70)</span>
+          </div>
+          <div class="signature"><b>Expected signature:</b> Furrowed brow, narrowed eyes, frown, lateral gaze scanning for additional information.</div>
+        </div>
+      </div>
+
+      <!-- FRUSTRATION -->
+      <div class="state-col">
+        <div class="state-band band-frustration"></div>
+        <div class="body">
+          <div class="state-name frustration">Frustration</div>
+          <div class="state-def">Affective barrier</div>
+          <div class="kicker">Primary Features</div>
+          <div class="feat-chips">
+            <span class="feat-chip"><i class="material-icons">arrow_upward</i>browInnerUp</span>
+            <span class="feat-chip"><i class="material-icons">compress</i>mouthPress (L/R)</span>
+            <span class="feat-chip"><i class="material-icons">east</i>jawForward</span>
+            <span class="feat-chip"><i class="material-icons">tag</i>frustration_indicator (idx 71)</span>
+          </div>
+          <div class="signature"><b>Expected signature:</b> Pressed lips, clenched jaw, nose sneer (AU 9), bursting uneven expression patterns.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bridge strip -->
+    <div class="bridge-strip">
+      <span class="label"><i class="material-icons" style="font-size:13px;">sync_alt</i>CROSS-STATE BRIDGE</span>
+      <span class="text"><b>boredom_indicator_vel_std</b> appears in the top-5 SHAP for both Confusion and Frustration — confirming D'Mello &amp; Graesser's affective-transition theory.</span>
+    </div>
+
+    <footer class="slide-footer">
+      <span>Efficient Attention Classification</span>
+      <span class="pageno">17 / 34</span>
+    </footer>
+  </div>
+
+  <aside data-notes="" class="hidden">Walking left to right: boredom is sustained disengagement — we expect eyeBlink, eyeLookDown, jawOpen, and the engineered boredom indicator at index 72 to dominate, with reduced facial animation, downward gaze drift and a flat expression distribution. Engagement is active attention — eyeWide, browInnerUp, mouthSmile and the engagement indicator at index 73. Confusion is cognitive overload — browDown, eyeSquint, mouthFrown and the confusion indicator at index 70. Frustration is an affective barrier — browInnerUp, mouthPress, jawForward and the frustration indicator at index 71. These sub-groups are pre-defined from the FACS literature and encode our prior about which features should matter. The SHAP analysis will validate most of these expectations and reveal two surprises: mouthSmileRight_median dominates boredom — that is social masking — and noseSneerLeft_max is unique to frustration, the lateralization of negative affect. The cross-state bridge at the bottom is the most theoretically interesting result: boredom indicator velocity standard deviation appears in the top-five SHAP for both confusion and frustration, confirming D'Mello and Graesser's affective-transition theory.</aside>
+
+
+</body></html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<title>Modality Choice</title>
+<link rel="stylesheet" href="global.css">
+<link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+<style>
+  .mod-grid{
+    display:grid;
+    grid-template-columns:1.22fr 1fr;
+    gap:24px;
+    flex:1;
+    margin-top:14px;
+    align-items:stretch;
+  }
+  .benefit-rows{ display:flex;flex-direction:column;gap:10px; }
+  .ben-row{
+    display:flex;
+    align-items: center;
+    gap:12px;
+    padding:10px 12px;
+    background:var(--bg-soft);
+    border-radius:8px;
+  }
+  .ben-ic{
+    flex-shrink:0;width:34px;height:34px;border-radius:8px;
+    background:#fff;color:var(--accent-deep);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ben-ic .material-icons{font-size:20px;}
+  .ben-t{
+    font-family:var(--font-body);font-size:14px;font-weight:600;color:var(--primary);
+    line-height:1.4;
+  }
+  .feat-table{ margin-top:14px; }
+  table.data.feat th{font-size:9.5px;padding:6px 10px;letter-spacing:0.14em;}
+  table.data.feat td{font-size:12px;padding:7px 10px;line-height:1.35;}
+  table.data.feat td.dim{font-family:var(--font-num);font-weight:600;color:var(--accent-deep);text-align:right;white-space:nowrap;font-size: 14px;}
+  table.data.feat tr.total td{background:var(--bg-tint);}
+  table.data.feat tr.total td.dim{color:var(--primary);}
+
+  .right-card{
+    background:var(--bg-tint);color:var(--primary);border-radius:12px;
+    border:1px solid var(--border);
+    border-left:3px solid var(--accent);
+    padding:20px 22px;display:flex;flex-direction:column;gap:12px;height:100%;
+    position:relative;overflow:hidden;
+  }
+  .right-card .deco-mesh{
+    position:absolute;right:-30px;top:-30px;width:140px;height:140px;
+    background:radial-gradient(circle at 30% 30%, rgba(20,184,166,0.18), transparent 70%);
+    pointer-events:none;
+  }
+  .rc-eyebrow{
+    font-family:var(--font-body);font-size:10px;font-weight:700;
+    letter-spacing:0.22em;color:var(--accent-deep);text-transform:uppercase;
+  }
+  .rc-title{
+    font-family:var(--font-heading);font-size:18px;font-weight:700;color:var(--primary);
+    line-height:1.25;margin-top:4px;
+  }
+  .rc-body{
+    font-family:var(--font-body);font-size:12.5px;color:var(--text-muted);
+    line-height:1.45;margin-top:6px;
+  }
+  .rc-stats{
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px;
+  }
+  .rc-stat{
+    background:#fff;border:1px solid var(--border);
+    border-radius:8px;padding:10px 12px;
+  }
+  .rc-stat .n{font-family:var(--font-num);font-size:30px;font-weight:700;color:var(--accent-deep);line-height:1;}
+  .rc-stat .l{font-family:var(--font-body);font-size:10px;font-weight:600;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:6px;line-height:1.3;}
+  .rc-photo{
+    width:100%;height:250px;border-radius:8px;object-fit:cover;margin-top:6px;
+    border:1px solid var(--border);
+  }
+</style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.hidden{display:none}</style></head>
+<body>
+<div class="slide" style="box-sizing: border-box; width: 1280px;">
+
+    <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
+
+  <div class="eyebrow">MODALITY CHOICE</div>
+  <div class="accent-bar" style="margin-top:8px;"></div>
+  <h1 class="headline">Why the Face, and Why MediaPipe?</h1>
+  <p class="subhead">The face is the only universally available, non-invasive, passively observable signal of cognitive-affective state that every laptop already captures.</p>
+
+  <div class="mod-grid">
+
+    <!-- LEFT COLUMN -->
+    <div style="display:flex;flex-direction:column;">
+      <div class="benefit-rows">
+        <div class="ben-row">
+          <div class="ben-ic"><span class="material-icons">shield</span></div>
+          <div class="ben-t">Non-invasive and passive monitoring — no wearables, no consent friction.</div>
+        </div>
+        <div class="ben-row">
+          <div class="ben-ic"><span class="material-icons">public</span></div>
+          <div class="ben-t">Facial expressions are universal across cultures.</div>
+        </div>
+        <div class="ben-row">
+          <div class="ben-ic"><span class="material-icons">bolt</span></div>
+          <div class="ben-t">MediaPipe enables real-time feature extraction on commodity CPUs.</div>
+        </div>
+      </div>
+
+      <div class="feat-table">
+        <table class="data feat">
+          <thead>
+            <tr>
+              <th style="width:32%;">Feature Group</th>
+              <th style="width:14%;text-align:right;">Dim</th>
+              <th style="width:54%;">What it captures</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Blendshape</td><td class="dim">52D</td><td>Per-AU facial muscle activation</td></tr>
+            <tr><td>Head Pose</td><td class="dim">6D</td><td>Pitch, yaw, roll + 3D position</td></tr>
+            <tr><td>Eye Gaze</td><td class="dim">6D</td><td>Direction vectors for each eye</td></tr>
+            <tr><td>Composite</td><td class="dim">10D</td><td>Cross-group engineered signals</td></tr>
+            <tr><td>Dynamics</td><td class="dim">4D</td><td>Temporal expressiveness metrics</td></tr>
+            <tr class="total"><td>Total per-frame</td><td class="dim">78D</td><td>One row per video frame</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right-card">
+      <div class="deco-mesh" data-decor="" aria-hidden="true"></div>
+      <div>
+        <div class="rc-eyebrow">MEDIAPIPE · 468 LANDMARKS</div>
+        <div class="rc-title">MediaPipe Face Mesh</div>
+        <div class="rc-body">MediaPipe Face Mesh — 468 landmarks, real-time on CPU.</div>
+      </div>
+
+      <div class="rc-stats">
+        <div class="rc-stat">
+          <div class="n">30+</div>
+          <div class="l">FPS on a single CPU</div>
+        </div>
+        <div class="rc-stat">
+          <div class="n">78D</div>
+          <div class="l">Per-frame feature vector</div>
+        </div>
+      </div>
+
+      <img src="img/frame_112_landmarks.png" alt="Facial recognition mesh overlay" class="rc-photo">
+    </div>
+
+  </div>
+
+  <footer class="slide-footer">
+    <span>Efficient Attention Classification</span>
+    <span class="pageno">07 / 34</span>
+  </footer>
+</div>
+
+<aside data-notes="" class="hidden">
+We chose the face as our modality for three reasons. First, it is non-invasive and passive — there are no wearables, no electrodes, and no consent friction, which matters in a classroom setting. Second, facial expressions are universal across cultures, so a model trained on the international DAiSEE benchmark transfers more cleanly to Cambodian learners than culturally bound audio or posture cues would. Third, the MediaPipe Face Mesh library runs at thirty-plus frames per second on a commodity C-P-U, which is critical for low-resource deployment in schools that cannot afford G-P-U hardware. MediaPipe extracts four hundred sixty-eight facial landmarks per frame, and from those landmarks we engineer a seventy-eight-dimensional per-frame feature vector — blendshapes, head pose, eye gaze, composite, and temporal dynamics. The methodology section will detail exactly how each of those seventy-eight features is constructed.
+</aside>
+
+
+</body></html>

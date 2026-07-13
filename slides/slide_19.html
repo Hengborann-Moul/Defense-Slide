@@ -1,0 +1,84 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>Section 03 — Results &amp; Discussion</title>
+  <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+  <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .section-shell { background: var(--primary); color: #fff; }
+    .accent-rule {
+      width: 56px; height: 3px; background: var(--accent); margin-bottom: 22px;
+    }
+    .topic-strip {
+      display: flex; gap: 28px; flex-wrap: wrap;
+      font-family: var(--font-body); font-size: 13px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    .topic-strip span { display: inline-flex; align-items: center; gap: 8px; }
+    .topic-strip .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--accent); display: inline-block; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; }
+    .topbar .crumb { font-family: var(--font-num); font-size: 13px; font-weight: 600; letter-spacing: 0.3em; color: var(--accent); }
+    .topbar .deck { font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.5); text-transform: uppercase; }
+    .section-num { font-family: var(--font-display); font-size: 360px; font-weight: 800; line-height: 0.85; color: rgba(255,255,255,0.06); position: absolute; right: 56px; bottom: 0; pointer-events: none; letter-spacing: -0.04em; }
+    .rq-pills {
+      display: flex; gap: 10px; margin-top: 18px;
+    }
+    .rq-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 5px 12px; border-radius: 999px;
+      background: rgba(20,184,166,0.12);
+      border: 1px solid rgba(20,184,166,0.35);
+      font-family: var(--font-num); font-size: 11px; font-weight: 600;
+      color: var(--accent); letter-spacing: 0.08em;
+    }
+    .rq-pill .num { font-weight: 800; }
+  </style>
+</head>
+<body>
+  <div class="slide slide-section">
+    <div class="section-shell">
+      <div class="grid-decor" data-decor="" aria-hidden="true"></div>
+
+      <div class="topbar relative z-10">
+        <div class="crumb">03 / 04</div>
+        <!--<div class="deck">Moul Hengborann · M-DAS ITC 2026</div>-->
+      </div>
+
+      <div class="relative z-10" style="max-width: 800px;">
+        <div class="accent-rule" data-decor="" aria-hidden="true"></div>
+        <div class="topic-strip mb-7">
+          <span><span class="dot"></span>Performance</span>
+          <span><span class="dot"></span>Per-Class Breakdown</span>
+          <span><span class="dot"></span>SHAP Analysis</span>
+          <span><span class="dot"></span>Ablations</span>
+          <span><span class="dot"></span>Robustness</span>
+        </div>
+        <h1 class="section-title">Results &amp; Discussion</h1>
+        <p class="section-tag">Numerical performance against 15 deep-learning baselines, per-class breakdown with confusion matrices, and a feature-by-feature SHAP analysis across all four affective states.</p>
+
+        <div class="rq-pills">
+          <span class="rq-pill"><span class="num">RQ1</span> Performance</span>
+          <span class="rq-pill"><span class="num">RQ2</span> Feature Importance</span>
+          <span class="rq-pill"><span class="num">RQ3</span> Robustness</span>
+        </div>
+      </div>
+
+      <div class="relative z-10 flex items-end justify-between">
+        <!--<div class="flex items-center gap-3" style="font-family: var(--font-num); font-size: 12px; font-weight: 500; letter-spacing: 0.18em; color: rgba(255,255,255,0.4);">
+          <i class="material-icons" style="font-size: 16px; color: var(--accent);">east</i>
+          <span>SLIDES 20 – 28</span>
+        </div>-->
+        <div style="font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 0.22em; color: rgba(255,255,255,0.35); text-transform: uppercase;">
+          Efficient Attention Classification
+        </div>
+      </div>
+
+      <div class="section-num" data-decor="" aria-hidden="true">03</div>
+    </div>
+  </div>
+
+  <aside data-notes="" class="hidden">Now to the results. I will answer RQ1 first — does our lightweight XGBoost model compete with deep-learning baselines on DAiSEE? Then RQ2 — which engineered features matter per affective state, validated by SHAP. And finally RQ3 — how robust is the framework to imbalance, ablation of feature categories, and choice of frame window. The next nine slides take you through the bar-chart comparison, per-state confusion matrices, top features per state, the cross-state bridge, and ablation studies on frame count and feature category contribution.</aside>
+
+
+</body></html>

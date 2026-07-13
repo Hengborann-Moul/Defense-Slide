@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<title>Contributions — What We Proved · Slide 31</title>
+<script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+<link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="global.css">
+<style>
+  .contrib-card {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 18px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+  .contrib-num {
+    font-family: var(--font-num);
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .contrib-num .check { font-family: var(--font-body); font-size: 22px; vertical-align: middle; margin-right: 2px; }
+  .contrib-text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--primary);
+  }
+  .contrib-text .lead {
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .contrib-text .body { color: var(--text); }
+  .num-inline { font-family: var(--font-num); font-weight: 600; color: var(--primary); }
+  .contrib-chip {
+    font-family: var(--font-num);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(20,184,166,0.12);
+    color: var(--accent-deep);
+    border: 1px solid rgba(20,184,166,0.3);
+    white-space: nowrap;
+  }
+  .summary-card { padding: 14px 18px; margin-top: 14px; }
+  .summary-card .ctitle { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-deep); margin-bottom: 6px; }
+  .summary-card .cbody { font-family: var(--font-body); font-size: 13.5px; line-height: 1.5; color: var(--text); }
+</style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.hidden{display:none}</style></head>
+<body>
+<div class="slide" style="box-sizing: border-box; width: 1280px;">
+
+    <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
+
+  <div style="margin-bottom:14px;" class="">
+    <div class="eyebrow">CONTRIBUTIONS · WHAT THIS THESIS PROVED</div>
+    <div class="accent-bar" style="margin-top:8px;"></div>
+    <h1 class="headline">Three Claims the Empirical Evidence Supports</h1>
+    <p class="subhead">A lightweight XGBoost on hand-crafted MediaPipe facial features matches deep-learning baselines on DAiSEE — and SHAP reveals each affective state has its own feature fingerprint.</p>
+  </div>
+
+  <div style="display:flex; flex-direction:column; gap:10px;">
+    <div class="contrib-card">
+      <div class="contrib-num"><span class="check">✓</span> 01</div>
+      <div class="contrib-text">
+        <span class="lead">Small models compete —</span> <span class="body">A lightweight XGBoost (<span class="num-inline">65.26%</span>) outperforms the median deep-learning baseline (<span class="num-inline">63.9%</span>) on DAiSEE, at a fraction of the compute cost. The full pipeline runs in <span class="num-inline">2.1 ms</span> per sample on commodity CPU.</span>
+      </div>
+      <div class="contrib-chip">→ Slide 20</div>
+    </div>
+
+    <div class="contrib-card">
+      <div class="contrib-num"><span class="check">✓</span> 02</div>
+      <div class="contrib-text">
+        <span class="lead">Each affective state has its own feature fingerprint —</span> <span class="body">Boredom is blendshapes, Engagement is composite + gaze, Confusion is composite + head orientation, Frustration is mouth/jaw blendshapes + bursting dynamics. No single feature group carries all four states.</span>
+      </div>
+      <div class="contrib-chip">→ Slides 22–27</div>
+    </div>
+
+    <div class="contrib-card">
+      <div class="contrib-num"><span class="check">✓</span> 03</div>
+      <div class="contrib-text">
+        <span class="lead">Imbalance is the bottleneck —</span> <span class="body">DAiSEE class imbalance remains the critical challenge; per-class recall on rare high-intensity states (Frustration Medium/High = <span class="num-inline">0.000</span>) is where the model breaks. SMOTE + class weighting + Focal Loss is insufficient for the most extreme imbalance.</span>
+      </div>
+      <div class="contrib-chip">→ Slide 21</div>
+    </div>
+  </div>
+
+  <div class="card-accent summary-card">
+    <div class="ctitle">ONE-SENTENCE THESIS SUMMARY</div>
+    <div class="cbody">A lightweight XGBoost on hand-crafted MediaPipe facial features matches deep-learning baselines on the DAiSEE attention-classification task — and SHAP reveals each affective state has its own feature fingerprint.</div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Efficient Attention Classification</span>
+    <div class="pageno">31 / 34</div>
+  </div>
+</div>
+<aside data-notes="" class="hidden">Three claims the empirical evidence supports. First, small models compete — the lightweight XGBoost at 65.26 percent accuracy outperforms the median deep-learning baseline at 63.9 percent on DAiSEE, at a fraction of the compute cost, running in 2.1 milliseconds per sample. Second, each affective state has its own feature fingerprint — Boredom is blendshapes, Engagement is composite plus gaze, Confusion is composite plus head orientation, Frustration is mouth and jaw blendshapes plus bursting dynamics. No single feature group carries all four states. Third, imbalance is the bottleneck — Frustration Medium and High recall collapses to zero, showing that SMOTE plus class weighting plus Focal Loss is insufficient for the most extreme imbalance. The one-sentence summary captures the whole thesis.</aside>
+
+
+</body></html>

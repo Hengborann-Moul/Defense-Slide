@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<title>Literature Review</title>
+
+
+<script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet" href="global.css"><link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons"><style>
+  .lit-grid{
+    display:grid;
+    grid-template-columns:1.85fr 1fr;
+    gap:24px;
+    flex:1;
+    margin-top:14px;
+    align-items:start;
+  }
+  table.data th{ font-size:10.5px;padding:7px 10px;letter-spacing:0.14em; }
+  table.data td{ font-size:12.5px;padding:8px 10px;line-height:1.4; }
+  table.data td.year{ font-family:var(--font-num);font-weight:600;color:var(--primary); }
+  table.data td.metric{ font-family:var(--font-num);font-weight:500;color:var(--accent-deep);text-align:right;white-space:nowrap; }
+  table.data tr.outlier td{ background:rgba(20,184,166,0.06); }
+  table.data tr.outlier td.metric{ color:var(--accent-deep);font-weight:700; }
+  .insight-card{
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    padding:18px 20px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .insight-h{
+    font-family:var(--font-heading);font-size:16px;font-weight:700;
+    color:var(--primary);line-height:1.25;
+  }
+  .insight-b{
+    font-family:var(--font-body);font-size:16px;color:var(--text-muted);
+    line-height:1.55;
+  }
+  .stat-row{
+    display:flex;gap:14px;margin-top:6px;
+  }
+  .stat-mini{
+    flex:1;background:var(--bg-soft);border-radius:6px;padding:10px 12px;
+  }
+  .stat-mini .n{
+    font-family:var(--font-num);font-size:22px;font-weight:700;
+    color:var(--primary);line-height:1;
+  }
+  .stat-mini .l{
+    font-family:var(--font-body);font-size:10px;font-weight:600;
+    color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;
+    margin-top:6px;
+  }
+  .cluster-bar{
+    height:8px;border-radius:4px;background:var(--bg-tint);position:relative;
+    margin-top:6px;
+  }
+  .cluster-bar .range{
+    position:absolute;left:30%;right:18%;height:100%;
+    background:var(--accent);border-radius:4px;
+  }
+  .cluster-bar .marker{
+    position:absolute;top:-3px;width:2px;height:14px;background:var(--warn);
+  }
+  .cluster-bar .marker .lbl{
+    position:absolute;top:18px;left:50%;transform:translateX(-50%);
+    font-family:var(--font-num);font-size:9.5px;color:var(--warn);white-space:nowrap;
+  }
+</style><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.hidden{display:none}</style><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.hidden{display:none}</style></head>
+<body>
+<div class="slide" style="box-sizing: border-box; width: 1280px;">
+
+    <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
+
+  <div class="eyebrow">LITERATURE REVIEW · 2016 – 2024</div>
+  <div class="accent-bar" style="margin-top:8px;"></div>
+  <h1 class="headline">How Prior Work Has Approached DAiSEE</h1>
+  <p class="subhead">A decade of deep-learning approaches — most cluster between 63% and 68% accuracy on the 4-class task. We ask the inverse question.</p>
+
+  <div class="lit-grid">
+
+    <!-- LEFT: data table -->
+    <div>
+      <table class="data">
+        <thead>
+          <tr>
+            <th style="width:8%;">Year</th>
+            <th style="width:22%;">Authors</th>
+            <th style="width:42%;">Method</th>
+            <th style="width:28%;text-align:right;">Reported Metric</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="year">2024</td><td>Singh et al.</td><td>Multimodal fusion (facial + physiological cues)</td><td class="metric">63.09% (4-class)</td></tr>
+          <tr><td class="year">2024</td><td>Tu et al.</td><td>ResNet-50 + TCN + ECA attention (CutMix)</td><td class="metric">63.28% (4-class)</td></tr>
+          <tr><td class="year">2024</td><td>Hasnine et al.</td><td>Feature selection + KNN on CNN features</td><td class="metric">68.57% (binary)</td></tr>
+          <tr class="outlier"><td class="year">2023</td><td>Santoni et al.</td><td>CNN (OpenFace) + PCA/SVD + SMOTE</td><td class="metric">77.97% (SVD+CNN)</td></tr>
+          <tr><td class="year">2022</td><td>Abdou et al.</td><td>EfficientNetB7 + TCN/LSTM/BiLSTM</td><td class="metric">64.67% / 67.48% / 66.39%</td></tr>
+          <tr><td class="year">2022</td><td>Mehta et al.</td><td>3D DenseNet with self-attention</td><td class="metric">63.59% (4-class)</td></tr>
+          <tr><td class="year">2022</td><td>Huang et al.</td><td>Optimized ShuffleNet v2 (lightweight CNN + SE)</td><td class="metric">63.9% / F1 0.735</td></tr>
+          <tr><td class="year">2021</td><td>Abedi &amp; Khan</td><td>ResNet-50 + Temporal ConvNet</td><td class="metric">63.9% (4-class, 5-fold CV)</td></tr>
+          <tr><td class="year">2016</td><td>Gupta et al.</td><td>Baseline CNNs (InceptionV3, C3D, LRCN)</td><td class="metric">~46–59% per-class</td></tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:12px;padding:8px 12px;background:var(--bg-soft);border-radius:6px;" class="">
+        <div style="display:flex;justify-content:space-between;align-items:center;" class="">
+          <span style="font-family:var(--font-body);font-size:10.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);" class="">4-class accuracy cluster</span>
+          <span style="font-family:var(--font-num);font-size:11px;color:var(--accent-deep);font-weight:600;">63% — 68%</span>
+        </div>
+        <div class="cluster-bar" data-decor="" aria-hidden="true">
+          <div class="range" style="box-sizing: border-box; width: 580px; height: 8px; transform: translate(-212px, 0px);"></div>
+          <div class="marker" style="left:84%;"><span class="lbl">Santoni 77.97%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: insight card -->
+    <div class="insight-card">
+      <div>
+        <div class="eyebrow" style="color:var(--accent-deep);font-size:10px;">THE GAP</div>
+        <div class="insight-h" style="margin-top:6px;">The gap our work targets</div>
+      </div>
+      <p class="insight-b">Almost every entry above requires a deep network trained end-to-end on video frames. We ask the inverse question: how far can a lightweight gradient-boosted tree take us, given the right hand-crafted features?</p>
+
+      <div class="stat-row">
+        <div class="stat-mini">
+          <div class="n">9</div>
+          <div class="l">Studies reviewed</div>
+        </div>
+        <div class="stat-mini">
+          <div class="n">2016–24</div>
+          <div class="l">Coverage window</div>
+        </div>
+      </div>
+
+      <div style="padding:10px 12px;background:var(--bg-tint);border-radius:6px;">
+        <div style="font-family:var(--font-body);font-size:11px;font-weight:700;color:var(--primary);letter-spacing:0.06em;">Closest in spirit</div>
+        <div style="font-family:var(--font-body);font-size:12px;color:var(--text-muted);margin-top:3px;line-height:1.45;">Santoni et al. (2023) — SMOTE on OpenFace features. Our work pushes this lighter path further with XGBoost + MediaPipe.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="slide-footer">
+    <span class="">Efficient Attention Classification</span>
+    <span class="pageno">06 / 34</span>
+  </footer>
+</div>
+
+<aside data-notes="" class="hidden">
+This table summarizes nine representative studies on the DAiSEE benchmark between twenty sixteen and twenty twenty-four. The headline observation is that almost every published approach reports accuracy somewhere between sixty-three and sixty-eight percent on the four-class task, regardless of how sophisticated the deep architecture is — ResNet plus temporal networks, three-dimensional DenseNet with self-attention, EfficientNet plus L-S-T-M, all land in that band. The one outlier is Santoni and colleagues in twenty twenty-three, who reached seventy-eight percent by combining OpenFace features with S-M-O-T-E oversampling; that is the closest in spirit to our approach. The gap our thesis targets is therefore not raw accuracy but computational cost and interpretability — every entry in this table requires a deep network trained end-to-end on video frames. We ask the inverse question: how far can a lightweight gradient-boosted tree take us, given the right hand-crafted features?
+</aside>
+
+
+</body></html>

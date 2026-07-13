@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<title>Cross-State Convergence · Slide 26</title>
+<script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+<link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="global.css">
+<style>
+  table.convergence { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 13px; }
+  table.convergence th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 9px 10px;
+    border-bottom: 1.5px solid var(--primary);
+    background: var(--bg-soft);
+  }
+  table.convergence th.rank-col { width: 60px; text-align: center; }
+  table.convergence td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-soft);
+    color: var(--text);
+    vertical-align: middle;
+  }
+  table.convergence td.rank {
+    text-align: center;
+    font-family: var(--font-num);
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 15px;
+  }
+  table.convergence td.feat {
+    font-family: var(--font-num);
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 12.5px;
+  }
+  table.convergence td.feat .shap {
+    font-family: var(--font-num);
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 11.5px;
+    margin-left: 4px;
+  }
+  table.convergence tr:last-child td { border-bottom: none; }
+  .col-bore { border-top: 2px solid var(--primary); }
+  .col-eng  { border-top: 2px solid var(--accent); }
+  .col-con  { border-top: 2px solid var(--warn); }
+  .col-fru  { border-top: 2px solid var(--negative); }
+  .summary-card { padding: 14px 16px; }
+  .summary-card .ctitle { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-deep); margin-bottom: 6px; }
+  .summary-card .cbody { font-size: 12px; line-height: 1.5; color: var(--text); }
+  .num-inline { font-family: var(--font-num); font-weight: 600; }
+</style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.grid{display:grid}.hidden{display:none}.grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.gap-3{gap:0.75rem}</style></head>
+<body>
+<div class="slide" style="box-sizing: border-box; width: 1280px;">
+
+    <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
+
+  <div style="margin-bottom:12px;" class="">
+    <div class="eyebrow">RQ2 · CROSS-STATE SHAP CONVERGENCE</div>
+    <div class="accent-bar" style="margin-top:8px;"></div>
+    <h1 class="headline">Each Emotion Has Its Own Feature Fingerprint — With Bridges</h1>
+    <p class="subhead">Top-5 features per affective state by mean absolute SHAP value. Three convergent patterns and three state-specific signatures emerge.</p>
+  </div>
+
+  <table class="convergence" style="margin-bottom:14px;">
+    <thead>
+      <tr>
+        <th class="rank-col">Rank</th>
+        <th class="">Boredom</th>
+        <th class="">Engagement</th>
+        <th>Confusion</th>
+        <th>Frustration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rank">1</td>
+        <td class="feat">mouthSmileRight_median <span class="shap">(0.17)</span></td>
+        <td class="feat">eye_activity_max <span class="shap">(0.19)</span></td>
+        <td class="feat">boredom_indicator_vel_std <span class="shap">(0.07)</span></td>
+        <td class="feat">mouthPucker_iqr <span class="shap">(0.075)</span></td>
+      </tr>
+      <tr>
+        <td class="rank">2</td>
+        <td class="feat">browInnerUp_range <span class="shap">(0.10)</span></td>
+        <td class="feat">eye_activity_p75 <span class="shap">(0.15)</span></td>
+        <td class="feat">mouthSmileRight_median <span class="shap">(0.065)</span></td>
+        <td class="feat">boredom_indicator_vel_std <span class="shap">(0.065)</span></td>
+      </tr>
+      <tr>
+        <td class="rank">3</td>
+        <td class="feat">mouthPressRight_mean <span class="shap">(0.09)</span></td>
+        <td class="feat">corr_boredom_related_jaw <span class="shap">(0.12)</span></td>
+        <td class="feat">browInnerUp_range <span class="shap">(0.055)</span></td>
+        <td class="feat">jawRight_std <span class="shap">(0.060)</span></td>
+      </tr>
+      <tr>
+        <td class="rank">4</td>
+        <td class="feat">head_roll_vel_max_abs <span class="shap">(0.07)</span></td>
+        <td class="feat">boredom_indicator_std <span class="shap">(0.11)</span></td>
+        <td class="feat">eyeLookDownLeft_kurtosis <span class="shap">(0.05)</span></td>
+        <td class="feat">combined_gaze_vertical_iqr <span class="shap">(0.055)</span></td>
+      </tr>
+      <tr>
+        <td class="rank">5</td>
+        <td class="feat">combined_gaze_vertical_iqr <span class="shap">(0.06)</span></td>
+        <td class="feat">corr_composite_mouth <span class="shap">(0.10)</span></td>
+        <td class="feat">eyeWideLeft_std <span class="shap">(0.045)</span></td>
+        <td class="feat">noseSneerLeft_max <span class="shap">(0.052)</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="grid grid-cols-3 gap-3">
+    <div class="card-soft summary-card">
+      <div class="ctitle">TRANSDIAGNOSTIC FEATURE</div>
+      <div class="cbody"><span class="num-inline">mouthSmileRight_median</span> appears in top-5 for Boredom (rank 1), Confusion (rank 2), and Frustration (rank 6). Direction varies: high smile → boredom, away from confusion.</div>
+    </div>
+    <div class="card-soft summary-card">
+      <div class="ctitle">CROSS-STATE BRIDGE</div>
+      <div class="cbody"><span class="num-inline">boredom_indicator_vel_std</span> appears in top-5 for both Confusion (rank 1) and Frustration (rank 2). Validates D'Mello &amp; Graesser's affective-transition theory.</div>
+    </div>
+    <div class="card-soft summary-card">
+      <div class="ctitle">STATE-SPECIFIC SIGNATURES</div>
+      <div class="cbody"><span class="num-inline">eye_activity_max</span> → Engagement only. <span class="num-inline">noseSneerLeft_max</span> → Frustration only. <span class="num-inline">head_roll_vel_max_abs</span> → Boredom only. These are unambiguous intervention signals.</div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Efficient Attention Classification</span>
+    <div class="pageno">26 / 34</div>
+  </div>
+</div>
+<aside data-notes="" class="hidden">This convergence table is the heart of the interpretability story. Three patterns emerge. First, mouthSmileRight_median is transdiagnostic — it appears in the top five for Boredom, Confusion, and Frustration, but with different SHAP directions: a high smile pushes the prediction toward Boredom and away from Confusion. Second, boredom_indicator_vel_std is a cross-state bridge — it tops Confusion and ranks second for Frustration, validating D'Mello and Graesser's affective-transition theory that these emotions share attentional mechanisms. Third, three features are unambiguously state-specific: eye_activity_max is unique to Engagement, noseSneerLeft_max is unique to Frustration, and head_roll_vel_max_abs is unique to Boredom. These state-specific signatures are the most actionable findings for e-learning intervention design — they support dimensional models of affect and let us target interventions precisely.</aside>
+
+
+</body></html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<title>Ablation + Deployment Proof · Slide 28</title>
+<script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+<link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="global.css">
+<style>
+  table.ablation { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 12.5px; }
+  table.ablation th {
+    text-align: center;
+    font-weight: 600;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 8px 6px;
+    border-bottom: 1.5px solid var(--primary);
+    background: var(--bg-soft);
+  }
+  table.ablation th.config-col { text-align: left; padding-left: 10px; }
+  table.ablation td {
+    padding: 8px 6px;
+    border-bottom: 1px solid var(--border-soft);
+    color: var(--text);
+    text-align: center;
+    font-family: var(--font-num);
+    font-weight: 500;
+  }
+  table.ablation td.config { text-align: left; font-family: var(--font-body); font-weight: 500; padding-left: 10px; color: var(--text); }
+  table.ablation tr.selected td { font-weight: 700; color: var(--primary); background: rgba(20,184,166,0.06); }
+  table.ablation tr.selected td:first-child { border-left: 3px solid var(--accent); padding-left: 7px; }
+  table.ablation tr:last-child td { border-bottom: none; }
+  .elbow-card { padding: 11px 14px; }
+  .elbow-card .ctitle { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-deep); margin-bottom: 4px; }
+  .elbow-card .cbody { font-size: 12px; line-height: 1.5; color: var(--text); }
+  .deploy-card { background: var(--bg-tint); color: var(--primary); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 16px 18px; }
+  .deploy-card .eyebrow-w { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-deep); margin-bottom: 8px; }
+  .deploy-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+  .deploy-stat .num { font-family: var(--font-num); font-weight: 700; color: var(--primary); font-size: 38px; line-height: 1; letter-spacing: -0.02em; }
+  .deploy-stat .lbl { font-family: var(--font-body); font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-top: 6px; }
+  .deploy-body { font-family: var(--font-body); font-size: 11.5px; line-height: 1.5; color: var(--text); margin-top: 10px; }
+  .faceaura-card { padding: 11px 14px; }
+  .faceaura-card .ctitle { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); margin-bottom: 4px; }
+  .faceaura-card .cbody { font-size: 11.5px; line-height: 1.5; color: var(--text); }
+  .chip-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .num-inline { font-family: var(--font-num); font-weight: 600; }
+</style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.grid{display:grid}.hidden{display:none}</style></head>
+<body>
+<div class="slide" style="box-sizing: border-box; width: 1280px;">
+
+    <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
+
+  <div style="margin-bottom:12px;">
+    <div class="eyebrow">RQ3 · DEPLOYMENT PROOF · SAMPLE APPLICATION</div>
+    <div class="accent-bar" style="margin-top:8px;"></div>
+  </div>
+
+  <img style="margin-top: -20px; width: 90%;" src="img/application.png" alt="Sample Application">
+
+  <div class="slide-footer">
+    <span>Efficient Attention Classification</span>
+    <div class="pageno">28 / 34</div>
+  </div>
+</div>
+<aside data-notes="" class="hidden">The ablation table confirms the 150-frame design choice. Performance rises sharply from 30 to 75 frames, continues to improve modestly up to 150, then plateaus or slightly decreases at 200 and 300 frames — additional context adds transition noise. 150 frames, or 10 seconds, is the elbow that balances performance against computational cost. The deployment panel on the right is the proof-of-concept: 2.1 milliseconds per-sample inference time and 15 megabytes combined model size — both negligible compared to deep-learning baselines that weigh hundreds of megabytes. The FaceAura app is a working proof, not just a benchmark — it runs end-to-end at 15 frames per second on commodity CPU, no GPU, no cloud. That is what makes real-time classroom deployment feasible on budget hardware.</aside>
+
+
+</body></html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>RQ1 — Performance Comparison</title>
+  <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+  <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .bar-chart {
+      background: var(--bg-soft);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 200px 1fr 56px;
+      align-items: center;
+      gap: 10px;
+      padding: 2.5px 0;
+    }
+    .bar-label {
+      font-family: var(--font-body); font-size: 10px; font-weight: 500;
+      color: var(--text-muted);
+      text-align: right;
+      line-height: 1.2;
+      letter-spacing: -0.005em;
+    }
+    .bar-label b { color: var(--primary); font-weight: 700; }
+    .bar-track {
+      height: 14px;
+      background: transparent;
+      position: relative;
+      border-radius: 2px;
+    }
+    .bar-fill {
+      height: 100%;
+      background: var(--primary-soft);
+      border-radius: 2px;
+      opacity: 0.78;
+    }
+    .bar-fill.highlight {
+      background: var(--accent);
+      opacity: 1;
+      box-shadow: 0 0 0 1.5px rgba(20,184,166,0.4);
+    }
+    .bar-val {
+      font-family: var(--font-num); font-size: 10.5px; font-weight: 600;
+      color: var(--primary); text-align: right;
+      letter-spacing: -0.01em;
+    }
+    .bar-val.hl { color: var(--accent-deep); font-weight: 700; font-size: 11.5px; }
+    .bar-row.hl .bar-label { color: var(--primary); font-weight: 700; }
+
+    .axis-tick {
+      display: grid;
+      grid-template-columns: 200px 1fr 56px;
+      gap: 10px;
+      margin-top: 6px;
+      font-family: var(--font-num); font-size: 9px; color: var(--text-soft);
+    }
+    .axis-tick .ticks {
+      display: flex; justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 3px;
+    }
+    .axis-tick .ticks span { letter-spacing: 0.04em; }
+
+    .stat-tile {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-tile.accent { border-color: var(--accent); background: rgba(20,184,166,0.04); }
+    .stat-tile .num {
+      font-family: var(--font-num); font-weight: 700;
+      font-size: 36px; line-height: 1; letter-spacing: -0.02em;
+    }
+    .stat-tile .num.teal { color: var(--accent-deep); }
+    .stat-tile .num.navy { color: var(--primary); }
+    .stat-tile .num.delta { color: var(--accent-deep); font-size: 32px; }
+    .stat-tile .lbl {
+      font-family: var(--font-body); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-muted); margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    .answer-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 9px 14px;
+      margin-top: 10px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .answer-card .badge {
+      font-family: var(--font-num); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.1em;
+      background: var(--accent); color: #fff;
+      padding: 3px 8px; border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .answer-card .text {
+      font-family: var(--font-body); font-size: 11px; color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .answer-card .text b { color: var(--primary); font-weight: 700; }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.mb-1{margin-bottom:0.25rem}.mt-1{margin-top:0.25rem}.mt-3{margin-top:0.75rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.flex-col{flex-direction:column}.gap-2\.5{gap:0.625rem}</style></head>
+<body>
+  <div class="slide" style="box-sizing: border-box; width: 1280px;">
+
+      <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
+
+    <div class="eyebrow mb-1">RQ1 · PERFORMANCE COMPARISON</div>
+    <div class="accent-bar" style="margin-top:8px;"></div>
+    <h1 class="headline">XGBoost Lands Competitive at 65.26% Accuracy</h1>
+    <p class="subhead">Compared against 15 published baselines on the same DAiSEE 4-class task. Above the deep-learning median (63.9%) with a model that fits in &lt;1 MB.</p>
+
+    <div class="grid mt-3" style="grid-template-columns: 65fr 35fr; gap: 16px;">
+      <!-- LEFT — Bar chart -->
+      <div>
+        <div class="bar-chart">
+          <!-- 16 bars -->
+          <div class="bar-row">
+            <div class="bar-label">I3D (Inflated 3D ConvNet)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 65.4%;"></div></div>
+            <div class="bar-val">52.35%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">CNN-RNN Baseline (DAiSEE)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 67.4%;"></div></div>
+            <div class="bar-val">53.90%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">DFSTN (SE-ResNet-50 + LSTM + GALN)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 73.6%;"></div></div>
+            <div class="bar-val">58.84%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">ViBED-Net (Transformer)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 78.0%;"></div></div>
+            <div class="bar-val">62.39%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">VisioPhysioENet</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 78.9%;"></div></div>
+            <div class="bar-val">63.09%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Tu et al. (ResNet-50 + TCN + ECA)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 79.1%;"></div></div>
+            <div class="bar-val">63.28%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Mehta et al. (3D DenseNet + Attn)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 79.5%;"></div></div>
+            <div class="bar-val">63.59%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Huang et al. (Opt. ShuffleNet v2)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 79.9%;"></div></div>
+            <div class="bar-val">63.90%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Abedi &amp; Khan (ResNet-50 + TCN)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 79.9%;"></div></div>
+            <div class="bar-val">63.90%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Affect-driven Ordinal Engagement</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 84.3%;"></div></div>
+            <div class="bar-val">67.40%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Abdou et al. (EfficientNetB7 + LSTM)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 84.4%;"></div></div>
+            <div class="bar-val">67.48%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">BiusFPN + ICCSA</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 85.2%;"></div></div>
+            <div class="bar-val">68.16%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Hasnine et al. (KNN on CNN features)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 85.7%;"></div></div>
+            <div class="bar-val">68.57%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">ViBED-Net (LSTM)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 91.8%;"></div></div>
+            <div class="bar-val">73.43%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Santoni et al. (SVD+CNN+SMOTE)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 97.5%;"></div></div>
+            <div class="bar-val">77.97%</div>
+          </div>
+          <div class="bar-row hl">
+            <div class="bar-label"><b>Proposed XGBoost (this work)</b></div>
+            <div class="bar-track"><div class="bar-fill highlight" style="width: 81.6%;"></div></div>
+            <div class="bar-val hl">65.26%</div>
+          </div>
+
+          <!-- Axis ticks -->
+          <div class="axis-tick">
+            <div></div>
+            <div class="ticks">
+              <span>50%</span><span>60%</span><span>70%</span><span>80%</span>
+            </div>
+            <div></div>
+          </div>
+        </div>
+
+        <!-- Answer callout -->
+        <div class="answer-card">
+          <span class="badge">RQ1</span>
+          <span class="text"><b>ANSWERED:</b> A lightweight XGBoost classifier matches or exceeds the median deep-learning baseline on DAiSEE — at a fraction of the compute cost.</span>
+        </div>
+      </div>
+
+      <!-- RIGHT — Stats column -->
+      <div class="flex flex-col gap-2.5">
+        <div class="stat-tile accent">
+          <div class="num teal">65.26%</div>
+          <div class="lbl">Proposed XGBoost — 4-class accuracy</div>
+        </div>
+        <div class="stat-tile">
+          <div class="num navy">63.9%</div>
+          <div class="lbl">Median deep-learning baseline</div>
+        </div>
+        <div class="stat-tile accent">
+          <div class="num delta">+1.36 pp</div>
+          <div class="lbl">Above median, with a model that fits in &lt;1 MB</div>
+        </div>
+        <div style="font-family: var(--font-body); font-size: 10.5px; color: var(--text-soft); line-height: 1.5; padding: 4px 4px 0;">
+          <i class="material-icons" style="font-size: 12px; vertical-align: middle; color: var(--accent);">info</i>
+          Bars sorted ascending. Proposed method highlighted teal. SOTA (Santoni et al., 77.97%) uses SMOTE on OpenFace features — same recipe as ours, but with deep representations.
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>Efficient Attention Classification</span>
+      <span class="pageno">20 / 34</span>
+    </footer>
+  </div>
+
+  <aside data-notes="" class="hidden">This is RQ1 — does our lightweight XGBoost model compete with deep-learning baselines on DAiSEE? The bar chart shows sixteen methods sorted ascending by 4-class accuracy. The proposed model, highlighted in teal, lands at 65.26 percent — above the deep-learning median of 63.9 percent, a 1.36 percentage-point margin, with a model that fits in under one megabyte versus 100-plus megabytes for the deep models. I want to acknowledge Santoni et al. at 77.97 percent as the current SOTA — but note that it uses SMOTE on OpenFace features, which is essentially our recipe with deep features instead of MediaPipe blendshapes. The takeaway: a lightweight gradient-boosted classifier matches or exceeds the median deep-learning baseline on the same DAiSEE 4-class task, at a fraction of the compute cost.</aside>
+
+
+</body></html>

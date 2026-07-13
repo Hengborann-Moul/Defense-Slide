@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<title>SHAP — Boredom · Slide 22</title>
+<script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+<link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="global.css">
+<style>
+  .shap-row { display: grid; grid-template-columns: 32px 1fr 60px 92px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-soft); gap: 10px; }
+  .shap-row:last-child { border-bottom: none; }
+  .shap-rank { font-family: var(--font-num); font-weight: 700; color: var(--accent); font-size: 15px; }
+  .shap-name { font-family: var(--font-num); font-weight: 600; color: var(--primary); font-size: 12.5px; }
+  .shap-val { font-family: var(--font-num); font-weight: 700; color: var(--primary); font-size: 13.5px; text-align: right; }
+  .cat-chip { display: inline-flex; align-items: center; justify-content: center; padding: 3px 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 999px; border: 1px solid var(--border); white-space: nowrap; }
+  .cat-blend { background: rgba(15,31,61,0.08); color: var(--primary); }
+  .cat-pose  { background: rgba(20,184,166,0.14); color: var(--accent-deep); }
+  .cat-gaze  { background: rgba(199,123,44,0.14); color: var(--warn); }
+  .cat-comp  { background: rgba(185,28,28,0.10); color: var(--negative); }
+  .cat-cross { background: rgba(124,58,237,0.12); color: #6D28D9; }
+  .cat-dyn   { background: rgba(124,58,237,0.12); color: #6D28D9; }
+  .catbar { display: grid; height: 22px; border-radius: 4px; overflow: hidden; }
+  .catbar > div { display:flex; align-items:center; justify-content:center; font-family: var(--font-num); font-weight: 700; font-size: 10px; color: #fff; }
+  .catbar-labels { display: grid; gap: 6px; margin-top: 7px; font-size: 10.5px; }
+  .catbar-labels span { font-weight: 600; }
+  .right-card .ctitle { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-deep); }
+  .right-card .cbody { font-size: 12.5px; line-height: 1.5; color: var(--text); margin-top: 5px; }
+  .num-inline { font-family: var(--font-num); font-weight: 600; }
+</style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.grid{display:grid}.hidden{display:none}</style></head>
+<body>
+<div class="slide" style="box-sizing: border-box; width: 1280px;">
+
+    <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
+
+  <div style="margin-bottom:12px;" class="">
+    <div class="eyebrow">RQ2 · SHAP ANALYSIS · BOREDOM</div>
+    <div class="accent-bar" style="margin-top:8px;"></div>
+    <h1 class="headline">Boredom is Written in Facial Muscle Suppression</h1>
+    <p class="subhead">Blendshapes dominate — <span class="num-inline">mouthSmileRight_median</span> is the single most important feature (SHAP = <span class="num-inline">0.17</span>), reflecting the social-masking smile that bored learners deploy.</p>
+  </div>
+
+  <div class="grid" style="grid-template-columns: 55fr 45fr; gap: 22px; flex: 1; min-height:0;">
+    <!-- LEFT 55% -->
+    <div style="display:flex; flex-direction:column;">
+      <div class="kicker" style="margin-bottom:4px;">TOP-5 SHAP FEATURES</div>
+      <div>
+        <div class="shap-row"><div class="shap-rank">01</div><div class="shap-name">mouthSmileRight_median</div><div class="shap-val">0.17</div><div class="cat-chip cat-blend">Blendshape</div></div>
+        <div class="shap-row"><div class="shap-rank">02</div><div class="shap-name">browInnerUp_range</div><div class="shap-val">0.10</div><div class="cat-chip cat-blend">Blendshape</div></div>
+        <div class="shap-row"><div class="shap-rank">03</div><div class="shap-name">mouthPressRight_mean</div><div class="shap-val">0.09</div><div class="cat-chip cat-blend">Blendshape</div></div>
+        <div class="shap-row"><div class="shap-rank">04</div><div class="shap-name">head_roll_vel_max_abs</div><div class="shap-val">0.07</div><div class="cat-chip cat-pose">Head Pose</div></div>
+        <div class="shap-row"><div class="shap-rank">05</div><div class="shap-name">combined_gaze_vertical_iqr</div><div class="shap-val">0.06</div><div class="cat-chip cat-gaze">Eye Gaze</div></div>
+      </div>
+
+      <div class="kicker" style="margin-top:14px; margin-bottom:6px;">CATEGORY CONTRIBUTION (TOP-30)</div>
+      <div class="catbar" style="grid-template-columns: 60fr 18fr 12fr 7fr 3fr;">
+        <div style="background:var(--primary);">60%</div>
+        <div style="background:var(--accent);">18%</div>
+        <div style="background:var(--warn);">12%</div>
+        <div style="background:var(--negative);">7%</div>
+        <div style="background:#7C3AED;">3%</div>
+      </div>
+      <div class="catbar-labels" style="grid-template-columns: 60fr 18fr 12fr 7fr 3fr;">
+        <span style="color:var(--primary);">Blendshapes</span>
+        <span style="color:var(--accent-deep);">Head Pose</span>
+        <span style="color:var(--warn);">Eye Gaze</span>
+        <span style="color:var(--negative);">Composite</span>
+        <span style="color:#7C3AED;">Dyn.</span>
+      </div>
+    </div>
+
+    <!-- RIGHT 45% -->
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div class="card-accent right-card">
+        <div class="ctitle">DOMINANT SIGNAL — Blendshapes · 52D</div>
+        <div class="cbody">AU-based features account for ~60% of top-ranked features. Boredom is primarily a state of facial muscle suppression — the model learns the absence of activation.</div>
+      </div>
+      <div class="card-accent right-card">
+        <div class="ctitle">SUBTLE RESTLESSNESS — Head Pose · 6D</div>
+        <div class="cbody">Head pose contributes dynamic features — slope, velocity, range — capturing the slow drift and micro-movements of a disengaged learner.</div>
+      </div>
+      <div class="card-accent right-card">
+        <div class="ctitle">ENGINEERED VALUE-ADD — Composite · 10D</div>
+        <div class="cbody"><span class="num-inline">combined_gaze_vertical_iqr</span> appears in top-5, confirming the value of cross-group engineered higher-order signals.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Efficient Attention Classification</span>
+    <div class="pageno">22 / 34</div>
+  </div>
+</div>
+<aside data-notes="" class="hidden">For Boredom, the SHAP analysis reveals a striking finding: mouthSmileRight_median is the single most important feature with a SHAP value of 0.17 — by far the strongest of any feature across all four states. This captures the social-masking smile that bored learners often maintain to appear attentive. The top five is dominated by blendshapes — browInnerUp_range and mouthPressRight_mean reinforce the muscle-suppression signature. Head pose contributes the dynamic head_roll_vel_max_abs, capturing slow disengaged drift. The engineered composite combined_gaze_vertical_iqr rounds out the top five, validating the cross-group feature engineering. Crucially, Boredom relies on a small number of strong features — top SHAP 0.17 is more than twice Confusion's 0.07.</aside>
+
+
+</body></html>

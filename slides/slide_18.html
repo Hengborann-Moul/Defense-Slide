@@ -1,0 +1,247 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>XGBoost + Imbalance Handling</title>
+  <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+  <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .arch-row {
+      display: flex; align-items: stretch; justify-content: center;
+      gap: 0;
+    }
+    .arch-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      width: 170px;
+      display: flex; flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .arch-card.last { border-color: var(--accent); background: rgba(20,184,166,0.06); }
+    .arch-card .step {
+      font-family: var(--font-num); font-size: 16px; font-weight: 700;
+      color: var(--accent); letter-spacing: 0.16em;
+    }
+    .arch-card .icon { color: var(--accent-deep); font-size: 24px; margin-top: 2px; }
+    .arch-card.last .icon { color: var(--accent-deep); }
+    .arch-card .name {
+      font-family: var(--font-heading); font-size: 14px; font-weight: 700;
+      color: var(--primary-soft); margin-top: 4px; line-height: 1.2;
+    }
+    .arch-card .meta {
+      font-family: var(--font-num); font-size: 14px; font-weight: 600;
+      color: var(--accent-deep); margin-top: 2px;
+    }
+    .arch-arrow {
+      display: flex; align-items: center;
+      color: var(--accent);
+      font-family: var(--font-num); font-size: 18px; font-weight: 600;
+      padding: 0 5px;
+    }
+    .hp-card {
+      background: var(--bg-tint);
+      color: var(--primary);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px 18px;
+      height: 100%;
+    }
+    .hp-card .eyebrow { color: var(--accent-deep); font-size: 10px; letter-spacing: 0.18em; }
+    .hp-card h3 {
+      font-family: var(--font-heading); font-size: 13px; font-weight: 700;
+      color: var(--primary-soft); margin-top: 2px;
+      letter-spacing: -0.005em;
+    }
+    .hp-card .grid-hp {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4px 14px;
+      margin-top: 8px;
+    }
+    .hp-card .hp-row {
+      display: flex; justify-content: space-between;
+      font-family: var(--font-num); font-size: 14px;
+      padding: 3px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+    .hp-card .hp-row .k { color: var(--text-muted); }
+    .hp-card .hp-row .v { color: var(--accent-deep); font-weight: 600; }
+
+    .imb-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      height: 100%;
+    }
+    .imb-card .eyebrow { color: var(--accent-deep); font-size: 10px; letter-spacing: 0.18em; }
+    .imb-card h3 {
+      font-family: var(--font-heading); font-size: 13px; font-weight: 700;
+      color: var(--primary-soft); margin-top: 2px;
+    }
+    .imb-block {
+      display: flex; gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .imb-block:last-child { border-bottom: none; }
+    .imb-block .badge {
+      width: 22px; height: 22px; border-radius: 6px;
+      background: var(--bg-tint);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-num); font-size: 10px; font-weight: 700;
+      color: var(--accent-deep);
+      flex-shrink: 0;
+    }
+    .imb-block .text {
+      font-family: var(--font-body); font-size: 14px; color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .imb-block .text b {
+      font-family: var(--font-heading); font-size: 11px; font-weight: 700;
+      color: var(--primary-soft);
+      display: block;
+    }
+    .imb-block .text .formula {
+      font-family: var(--font-num); font-size: 10px; color: var(--accent-deep);
+      background: rgba(20,184,166,0.08);
+      padding: 1px 5px; border-radius: 3px;
+      display: inline-block; margin-top: 2px;
+    }
+    .footer-strip {
+      background: rgba(20,184,166,0.10);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      padding: 6px 14px;
+      margin-top: 8px;
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--font-body); font-size: 11px; color: var(--text-muted);
+    }
+    .footer-strip b { color: var(--accent-deep); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="slide">
+      <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
+    <div class="eyebrow">METHODOLOGY · XGBOOST ARCHITECTURE</div>
+    <div class="accent-bar" style="margin-top:8px;"></div>
+    <h1 class="headline">Four Independent Classifiers + Three-Layer Imbalance Handling</h1>
+    <p class="subhead">Four XGBoost models (one per affective state) trained on the top-500 engineered features. Imbalance handled at data, algorithmic, and loss levels.</p>
+
+    <!-- Architecture row -->
+    <div class="arch-row mt-3">
+      <div class="arch-card">
+        <div class="step">01</div>
+        <i class="material-icons icon">input</i>
+        <div class="name">Raw Features</div>
+        <div class="meta">78D</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-card">
+        <div class="step">02</div>
+        <i class="material-icons icon">account_tree</i>
+        <div class="name">Feature Engineering</div>
+        <div class="meta">~2,152D</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-card">
+        <div class="step">03</div>
+        <i class="material-icons icon">filter_alt</i>
+        <div class="name">Feature Selection</div>
+        <div class="meta">Top 500</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-card">
+        <div class="step">04</div>
+        <i class="material-icons icon">park</i>
+        <div class="name">4× XGBoost Classifiers</div>
+        <div class="meta">B · E · C · F</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-card">
+        <div class="step">05</div>
+        <i class="material-icons icon">trending_up</i>
+        <div class="name">Probability Calibration + Threshold Optimization</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-card last">
+        <div class="step">06</div>
+        <i class="material-icons icon">output</i>
+        <div class="name">4×3 Output</div>
+        <div class="meta">Low / Med / High</div>
+      </div>
+    </div>
+
+    <!-- Two side-by-side cards -->
+    <div class="grid grid-cols-2 gap-4 mt-3">
+      <!-- LEFT — Hyperparameters -->
+      <div class="hp-card">
+        <div class="eyebrow">XGBOOST HYPERPARAMETERS</div>
+        <h3>Tuned via 5-fold CV on training fold</h3>
+        <div class="grid-hp">
+          <div class="hp-row"><span class="k">max_depth</span><span class="v">8</span></div>
+          <div class="hp-row"><span class="k">learning_rate</span><span class="v">0.05</span></div>
+          <div class="hp-row"><span class="k">n_estimators</span><span class="v">500</span></div>
+          <div class="hp-row"><span class="k">subsample</span><span class="v">0.8</span></div>
+          <div class="hp-row"><span class="k">colsample_bytree</span><span class="v">0.8</span></div>
+          <div class="hp-row"><span class="k">min_child_weight</span><span class="v">3</span></div>
+          <div class="hp-row"><span class="k">gamma</span><span class="v">0.1</span></div>
+          <div class="hp-row"><span class="k">reg_alpha (L1)</span><span class="v">0.1</span></div>
+          <div class="hp-row"><span class="k">reg_lambda (L2)</span><span class="v">1.0</span></div>
+          <div class="hp-row"><span class="k">objective</span><span class="v">multi:softprob</span></div>
+          <div class="hp-row" style="grid-column: span 2;"><span class="k">early_stopping</span><span class="v">50 rounds</span></div>
+        </div>
+      </div>
+
+      <!-- RIGHT — Imbalance handling -->
+      <div class="imb-card">
+        <div class="eyebrow">IMBALANCE HANDLING</div>
+        <h3>Three complementary pressures</h3>
+
+        <div class="imb-block">
+          <div class="badge">a</div>
+          <div class="text">
+            <b>Data level — SMOTE</b>
+            k=5 neighbors, applied to training split only. Linear interpolation in feature space.
+          </div>
+        </div>
+
+        <div class="imb-block">
+          <div class="badge">b</div>
+          <div class="text">
+            <b>Algorithmic level — Class Weights</b>
+            Inverse-frequency weighting. Forces higher penalty on minority-class errors.
+            <span class="formula">w_c = N / (K · N_c)</span>
+          </div>
+        </div>
+
+        <div class="imb-block">
+          <div class="badge">c</div>
+          <div class="text">
+            <b>Loss level — Focal Loss</b>
+            Custom objective with explicit gradient/Hessian. Down-weights well-classified easy examples.
+            <span class="formula">α = 0.25, γ = 2.0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer strip -->
+    <div class="footer-strip">
+      <i class="material-icons" style="font-size:14px; color: var(--accent);">tune</i>
+      <span><b>Post-processing:</b> Isotonic Regression calibration + threshold search in [0.2, 0.8] to maximize Macro F1.</span>
+    </div>
+
+    <footer class="slide-footer">
+      <span>Efficient Attention Classification</span>
+      <span class="pageno">18 / 34</span>
+    </footer>
+  </div>
+
+  <aside data-notes="" class="hidden">We train four independent XGBoost classifiers, one per affective state — boredom, engagement, confusion and frustration. The justification for four independent models rather than a shared-weight multi-task head is that the per-state feature dependencies differ enough that shared weights hurt minority states. Each model uses max_depth 8, learning_rate 0.05, 500 estimators, subsample 0.8, colsample_bytree 0.8, min_child_weight 3, gamma 0.1, reg_alpha 0.1, reg_lambda 1.0, multi:softprob objective, and 50-round early stopping — all tuned via 5-fold cross-validation on the training fold. Imbalance is attacked at three levels: data via SMOTE with k=5 neighbors applied to the training split only; algorithmic via inverse-frequency class weights w_c equals N over K times N_c; and loss via Focal Loss with alpha 0.25 and gamma 2.0, originally proposed for object detection and adapted here as a custom XGBoost objective with explicit gradient and Hessian. Finally, isotonic regression calibrates the tree-ensemble probabilities, and a threshold search in 0.2 to 0.8 maximizes Macro F1.</aside>
+
+
+</body></html>

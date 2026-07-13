@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>Frame Extraction &amp; Selection</title>
+  <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
+  <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .step-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .step-card .num-cell {
+      width: 38px; height: 38px;
+      background: var(--bg-tint);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-num); font-weight: 700; font-size: 14px;
+      color: var(--accent-deep);
+      letter-spacing: 0.05em;
+    }
+    .step-card h2 {
+      font-family: var(--font-heading); font-size: 13.5px; font-weight: 700;
+      color: var(--primary-soft); letter-spacing: -0.005em;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .step-card p {
+      font-family: var(--font-body); font-size: 12px; color: var(--text);
+      line-height: 1.5; margin-top: 4px;
+    }
+    .step-card .icon { color: var(--accent); font-size: 16px; }
+    .step-arrow {
+      width: 2px; height: 14px; background: var(--accent);
+      margin: 0 auto;
+      position: relative;
+    }
+    .step-arrow::after {
+      content: ''; position: absolute; left: 50%; bottom: -3px;
+      transform: translateX(-50%) rotate(45deg);
+      width: 6px; height: 6px;
+      border-right: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+    .tensor-card {
+      background: var(--bg-tint);
+      color: var(--primary);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 12px;
+      padding: 22px 22px 20px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .tensor-card::before {
+      content: ''; position: absolute; right: -40px; top: -40px;
+      width: 160px; height: 160px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(20,184,166,0.18), transparent 65%);
+    }
+    .tensor-card .eyebrow {
+      color: var(--accent-deep);
+    }
+    .tensor-card .formula {
+      font-family: var(--font-num); font-size: 26px; font-weight: 600;
+      color: var(--primary); letter-spacing: 0.02em;
+      margin-top: 6px;
+      line-height: 1.1;
+    }
+    .tensor-card .formula .dim {
+      color: var(--accent-deep);
+    }
+    .tensor-card p.body {
+      font-family: var(--font-body); font-size: 14px;
+      color: var(--text-muted); line-height: 1.55; margin-top: 10px;
+    }
+    .why-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-top: 12px;
+    }
+    .why-card .kicker { color: var(--accent-deep); font-size: 16px; }
+    .why-card ul { margin-top: 4px; list-style: none; padding: 0; }
+    .why-card li {
+      font-family: var(--font-body); font-size: 14px; color: var(--text-muted);
+      line-height: 1.5; padding-left: 12px; position: relative;
+    }
+    .why-card li::before {
+      content: '·'; position: absolute; left: 2px; top: -2px;
+      color: var(--accent); font-weight: 700; font-size: 16px;
+    }
+    .why-card li b { color: var(--primary); font-weight: 600; font-family: var(--font-num); }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.mb-1{margin-bottom:0.25rem}.mt-1\.5{margin-top:0.375rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.flex-col{flex-direction:column}.items-center{align-items:center}.gap-1{gap:0.25rem}.gap-2{gap:0.5rem}</style></head>
+<body>
+  <div class="slide" style="box-sizing: border-box; width: 1280px;">
+
+      <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
+
+    <div class="eyebrow">METHODOLOGY · FRAME SELECTION</div>
+    <div class="accent-bar" style="margin-top:8px;"></div>
+    <h1 class="headline">How Frames Are Extracted and Selected Per Clip</h1>
+    <p class="subhead">Raw DAiSEE video is 30 fps with variable clip duration. We downsample to 15 fps and standardize every clip to 150 frames — about 10 seconds of behavior — to balance temporal resolution against compute cost.</p>
+
+    <div class="grid mt-4" style="grid-template-columns: 55fr 45fr; gap: 22px;">
+      <!-- LEFT — 4-step process -->
+      <div class="flex flex-col gap-1">
+        <div class="step-card">
+          <div class="num-cell">01</div>
+          <div>
+            <h2><i class="material-icons icon">slow_motion_video</i>30 fps → 15 fps downsample</h2>
+            <p>Skip every other frame from the original 30 fps recording. Halves compute without losing meaningful expression dynamics (most facial actions live below 5 Hz).</p>
+          </div>
+        </div>
+        <div class="step-arrow" data-decor="" aria-hidden="true"></div>
+        <div class="step-card">
+          <div class="num-cell">02</div>
+          <div>
+            <h2><i class="material-icons icon">view_week</i>Uniform 150-frame window</h2>
+            <p>For clips longer than 150 frames (~10 s at 15 fps), select frames at regular intervals to preserve temporal structure. 150 frames was chosen via ablation (see Slide 28).</p>
+          </div>
+        </div>
+        <div class="step-arrow" data-decor="" aria-hidden="true"></div>
+        <div class="step-card">
+          <div class="num-cell">03</div>
+          <div>
+            <h2><i class="material-icons icon">all_inclusive</i>Last-frame padding for short clips</h2>
+            <p>For clips shorter than 150 frames, repeat the final frame to maintain sequence length. This preserves the input dimensionality expected by downstream feature engineering.</p>
+          </div>
+        </div>
+        <div class="step-arrow" data-decor="" aria-hidden="true"></div>
+        <div class="step-card">
+          <div class="num-cell">04</div>
+          <div>
+            <h2><i class="material-icons icon">verified_user</i>Missing-detection handling</h2>
+            <p>Clips with zero face detections are excluded. Clips with partial detections must retain at least 150 frames with valid face features — quality control that ensures reliable feature representations.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT — Output tensor + why -->
+      <div>
+        <div class="tensor-card">
+          <div class="eyebrow">OUTPUT TENSOR</div>
+          <div class="formula">X ∈ ℝ<sup style="font-size:14px;">(<span class="dim">N</span> × <span class="dim">150</span> × <span class="dim">78</span>)</sup></div>
+          <p class="body">Where <b style="color: var(--accent);">N</b> is the number of video clips, <b style="color: var(--accent);">T = 150</b> is the sequence length, and <b style="color: var(--accent);">D = 78</b> is the per-frame feature dimensionality.</p>
+          <div class="flex items-center gap-2 mt-3" style="font-family: var(--font-num); font-size: 10.5px; color: var(--text-muted); letter-spacing: 0.1em;">
+            <span style="background: rgba(20,184,166,0.18); color: var(--accent-deep); padding: 2px 8px; border-radius: 4px;">N</span>
+            <span style="background: #fff; color: var(--primary); padding: 2px 8px; border-radius: 4px; border:1px solid var(--border);">× 150</span>
+            <span style="background: #fff; color: var(--primary); padding: 2px 8px; border-radius: 4px; border:1px solid var(--border);">× 78</span>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="kicker" style="font-weight:700; letter-spacing:0.14em; text-transform:uppercase;">Why 150 frames?</div>
+          <ul>
+            <li><b>30 frames</b> → too short, misses slow boredom drift</li>
+            <li><b>150 frames</b> → elbow point (see Slide 28 ablation)</li>
+            <li><b>300 frames</b> → plateau, adds transition noise</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>Efficient Attention Classification</span>
+      <span class="pageno">14 / 34</span>
+    </footer>
+  </div>
+
+  <aside data-notes="" class="hidden">Frame extraction begins with a deliberate 30-to-15 fps downsample — we skip every other frame. This halves the compute budget without losing meaningful expression dynamics, because most facial actions live below 5 Hz. We then standardize every clip to 150 frames, roughly 10 seconds at 15 fps. For longer clips we sample at uniform intervals to preserve temporal structure; for shorter clips we repeat the final frame. The 150-frame choice is not arbitrary — it is the elbow point in the ablation on slide 28, after which performance plateaus and transition noise creeps in. Finally, quality control drops clips with zero face detections, which removes roughly 5 percent of the corpus. The output tensor X lives in R to the N by 150 by 78, where N is the number of clips, 150 is the sequence length, and 78 is the per-frame feature dimensionality.</aside>
+
+
+</body></html>
