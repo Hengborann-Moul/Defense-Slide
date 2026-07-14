@@ -3,17 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Thesis Defense — Slide Navigator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: #0a1530;
     color: #fff;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
+
+  /* ========== Top bar ========== */
   .topbar {
     background: #0F1F3D;
     border-bottom: 1px solid rgba(20,184,166,0.3);
@@ -46,17 +49,25 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    font-family: inherit;
+    transition: background 0.15s, border-color 0.15s;
   }
   .btn:hover { background: rgba(20,184,166,0.25); }
+  .btn.off {
+    color: rgba(255,255,255,0.4);
+    border-color: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+  }
   .btn .material-icons { font-size: 16px; }
   .counter {
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
     color: rgba(255,255,255,0.6);
     padding: 0 12px;
   }
   .counter .current { color: #14B8A6; font-weight: 700; }
 
+  /* ========== Stage ========== */
   .stage {
     flex: 1;
     display: flex;
@@ -106,6 +117,163 @@
   .nav-arrow.next { right: 24px; }
   .nav-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
 
+  /* ========== Liquid glass notes overlay ========== */
+  .notes-overlay {
+    position: absolute;
+    left: 28px;
+    right: 28px;
+    bottom: 28px;
+    z-index: 5;
+
+    /* Solid, high-contrast card so the script is easy to read (no white text) */
+    background: linear-gradient(135deg,
+      rgba(255,255,255,0.98) 0%,
+      rgba(244,250,249,0.96) 60%,
+      rgba(223,242,239,0.96) 100%);
+    backdrop-filter: blur(10px) saturate(160%);
+    -webkit-backdrop-filter: blur(10px) saturate(160%);
+
+    /* Soft liquid edge */
+    border: 1px solid rgba(20,184,166,0.55);
+    border-left: 4px solid #14B8A6;
+    border-radius: 16px;
+
+    /* Layered glow shadows */
+    box-shadow:
+      0 16px 44px rgba(0,0,0,0.40),
+      0 1px 0 rgba(255,255,255,0.6) inset,
+      0 0 0 1px rgba(20,184,166,0.25);
+
+    /* Layout */
+    padding: 14px 20px 14px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .notes-overlay.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+
+  /* Top highlight strip — liquid shimmer */
+  .notes-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 14px; right: 14px;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(20,184,166,0.9) 20%,
+      rgba(15,118,110,0.9) 50%,
+      rgba(20,184,166,0.9) 80%,
+      transparent 100%);
+    border-radius: 1px;
+  }
+
+  /* Left icon badge */
+  .notes-overlay .notes-icon {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(20,184,166,0.45), rgba(15,31,61,0.55));
+    border: 1px solid rgba(20,184,166,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #99F0E5;
+    box-shadow: 0 2px 8px rgba(20,184,166,0.3) inset;
+    margin-top: 1px;
+  }
+  .notes-overlay .notes-icon .material-icons {
+    font-size: 18px;
+  }
+
+  /* Body content */
+  .notes-overlay .notes-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .notes-overlay .notes-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+  }
+  .notes-overlay .label-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #14B8A6;
+  }
+  .notes-overlay .slide-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: rgba(15,31,61,0.6);
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: rgba(15,31,61,0.08);
+    border: 1px solid rgba(15,31,61,0.12);
+  }
+  .notes-overlay .notes-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14.5px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #0F1F3D;
+    max-height: 116px;
+    overflow-y: auto;
+    padding-right: 4px;
+    text-shadow: none;
+  }
+  .notes-overlay .notes-text::-webkit-scrollbar {
+    width: 4px;
+  }
+  .notes-overlay .notes-text::-webkit-scrollbar-thumb {
+    background: rgba(20,184,166,0.4);
+    border-radius: 2px;
+  }
+  .notes-overlay .notes-text::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Close button */
+  .notes-overlay .notes-close {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: rgba(15,31,61,0.06);
+    border: 1px solid rgba(15,31,61,0.12);
+    color: rgba(15,31,61,0.55);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+  .notes-overlay .notes-close:hover {
+    background: rgba(15,31,61,0.12);
+    color: #0F1F3D;
+  }
+  .notes-overlay .notes-close .material-icons {
+    font-size: 14px;
+  }
+
+  /* Empty state */
+  .notes-overlay.empty .notes-text {
+    color: rgba(15,31,61,0.45);
+    font-style: italic;
+  }
+
+  /* ========== Thumbstrip ========== */
   .thumbstrip {
     background: #0F1F3D;
     border-top: 1px solid rgba(20,184,166,0.2);
@@ -155,6 +323,7 @@
     font-weight: 700;
   }
 
+  /* ========== Help bar ========== */
   .helpbar {
     background: rgba(20,184,166,0.08);
     border-top: 1px solid rgba(20,184,166,0.2);
@@ -181,6 +350,7 @@
 <div class="topbar">
   <div class="title"><span class="accent">●</span> Efficient Attention Classification — Thesis Defense · Slide Navigator</div>
   <div class="controls">
+    <button class="btn" id="notesBtn" title="Toggle speaker notes (N)"><span class="material-icons">subtitles</span> Notes</button>
     <button class="btn" id="openBtn"><span class="material-icons">open_in_new</span> Open in new tab</button>
     <button class="btn" id="fullscreenBtn"><span class="material-icons">fullscreen</span> Fullscreen</button>
     <span class="counter"><span class="current" id="curNum">01</span> / <span id="totalNum">34</span></span>
@@ -191,6 +361,20 @@
   <button class="nav-arrow prev" id="prevBtn" title="Previous (←)">‹</button>
   <div class="frame-wrap">
     <iframe id="frame" src="slide_01.html"></iframe>
+
+    <!-- Liquid-glass speaker notes overlay -->
+    <div class="notes-overlay" id="notesOverlay">
+      <div class="notes-icon"><span class="material-icons">record_voice_over</span></div>
+      <div class="notes-body">
+        <div class="notes-label">
+          <span class="label-text">Speaker Script</span>
+          <span class="slide-tag" id="notesSlideTag">SLIDE 01</span>
+        </div>
+        <div class="notes-text" id="notesText">Loading…</div>
+      </div>
+      <button class="notes-close" id="notesClose" title="Hide notes (N)"><span class="material-icons">close</span></button>
+    </div>
+
   </div>
   <button class="nav-arrow next" id="nextBtn" title="Next (→)">›</button>
 </div>
@@ -204,10 +388,13 @@
     Navigate: <kbd>←</kbd> <kbd>→</kbd> or <kbd>Space</kbd> &nbsp;|&nbsp;
     First/Last: <kbd>Home</kbd> <kbd>End</kbd> &nbsp;|&nbsp;
     Fullscreen: <kbd>F</kbd> &nbsp;|&nbsp;
-    Open current in new tab: <kbd>O</kbd>
+    Open in new tab: <kbd>O</kbd> &nbsp;|&nbsp;
+    Toggle notes: <kbd>N</kbd>
   </div>
   <div>34 slides · 1280 × 720 · Navy + Teal</div>
 </div>
+
+<script src="notes-data.js"></script>
 
 <script>
   const TOTAL = 34;
@@ -215,11 +402,14 @@
   for (let i = 1; i <= TOTAL; i++) {
     slides.push({
       n: i,
-      file: 'slide_' + String(i).padStart(2, '0') + '.html'
+      file: 'slide_' + String(i).padStart(2, '0') + '.html',
+      notes: ''  // cached notes text
     });
   }
 
   let current = 1;
+  let notesVisible = true;
+
   const frame = document.getElementById('frame');
   const curNum = document.getElementById('curNum');
   const prevBtn = document.getElementById('prevBtn');
@@ -227,6 +417,11 @@
   const openBtn = document.getElementById('openBtn');
   const fullscreenBtn = document.getElementById('fullscreenBtn');
   const thumbstrip = document.getElementById('thumbstrip');
+  const notesBtn = document.getElementById('notesBtn');
+  const notesOverlay = document.getElementById('notesOverlay');
+  const notesText = document.getElementById('notesText');
+  const notesSlideTag = document.getElementById('notesSlideTag');
+  const notesClose = document.getElementById('notesClose');
 
   // Build thumbnails
   slides.forEach(s => {
@@ -237,6 +432,73 @@
     t.onclick = () => goTo(s.n);
     thumbstrip.appendChild(t);
   });
+
+  // Extract speaker notes for a slide.
+  // Primary source: embedded window.SLIDE_NOTES (works under file:// and http://
+  // without any cross-document access). Falls back to iframe/fetch only for slides
+  // not present in the embedded data (e.g. newly added slides served over http://).
+  async function fetchNotes(slide) {
+    if (slide.notes) return slide.notes;  // cached
+
+    let text = '';
+
+    // 1) Embedded notes data — works regardless of protocol
+    if (window.SLIDE_NOTES && typeof window.SLIDE_NOTES[slide.n] === 'string') {
+      text = window.SLIDE_NOTES[slide.n].trim();
+    }
+
+    // 2) Direct DOM access on the currently displayed main frame (http:// only)
+    if (!text && frame.getAttribute('src') === slide.file) {
+      try {
+        const aside = frame.contentDocument.querySelector('aside[data-notes]');
+        if (aside) text = aside.textContent.trim();
+      } catch(e) { /* cross-origin — fall through */ }
+    }
+
+    // 3) Hidden-iframe fallback (http:// only)
+    if (!text) {
+      try {
+        const iframe = document.createElement('iframe');
+        iframe.src = slide.file;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        await new Promise(res => {
+          iframe.onload = res;
+          setTimeout(res, 2000);  // timeout fallback
+        });
+        try {
+          const aside = iframe.contentDocument.querySelector('aside[data-notes]');
+          if (aside) text = aside.textContent.trim();
+        } catch(e) { /* cross-origin — fall through to fetch */ }
+        document.body.removeChild(iframe);
+      } catch(e) { /* ignore */ }
+    }
+
+    // 4) fetch() fallback (http:// only)
+    if (!text) {
+      try {
+        const resp = await fetch(slide.file);
+        const html = await resp.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const aside = doc.querySelector('aside[data-notes]');
+        if (aside) text = aside.textContent.trim();
+      } catch(e) { /* give up */ }
+    }
+
+    slide.notes = text || '(No speaker notes for this slide.)';
+    return slide.notes;
+  }
+
+  async function updateNotes(n) {
+    notesSlideTag.textContent = 'SLIDE ' + String(n).padStart(2, '0');
+    notesText.textContent = 'Loading…';
+    notesOverlay.classList.remove('empty');
+    const text = await fetchNotes(slides[n-1]);
+    notesText.textContent = text;
+    if (!text || text.startsWith('(No speaker')) {
+      notesOverlay.classList.add('empty');
+    }
+  }
 
   function goTo(n) {
     if (n < 1 || n > TOTAL) return;
@@ -251,6 +513,13 @@
         t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       }
     });
+    updateNotes(n);
+  }
+
+  function toggleNotes() {
+    notesVisible = !notesVisible;
+    notesOverlay.classList.toggle('hidden', !notesVisible);
+    notesBtn.classList.toggle('off', !notesVisible);
   }
 
   prevBtn.onclick = () => goTo(current - 1);
@@ -261,6 +530,8 @@
     if (!document.fullscreenElement) elem.requestFullscreen();
     else document.exitFullscreen();
   };
+  notesBtn.onclick = toggleNotes;
+  notesClose.onclick = toggleNotes;
 
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
@@ -269,6 +540,12 @@
     else if (e.key === 'End') { e.preventDefault(); goTo(TOTAL); }
     else if (e.key === 'f' || e.key === 'F') { fullscreenBtn.click(); }
     else if (e.key === 'o' || e.key === 'O') { openBtn.click(); }
+    else if (e.key === 'n' || e.key === 'N') { toggleNotes(); }
+  });
+
+  // Wait for first iframe to load before pulling notes
+  frame.addEventListener('load', () => {
+    if (notesVisible) updateNotes(current);
   });
 
   goTo(1);
