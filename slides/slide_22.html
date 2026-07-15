@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8">
-<title>SHAP — Boredom · Slide 22</title>
+<title>SHAP: Boredom · Slide 22</title>
 <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
 <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="global.css">
@@ -36,7 +36,7 @@
     <div class="eyebrow">RQ2 · SHAP ANALYSIS · BOREDOM</div>
     <div class="accent-bar" style="margin-top:8px;"></div>
     <h1 class="headline">Boredom is Written in Facial Muscle Suppression</h1>
-    <p class="subhead">Blendshapes dominate — <span class="num-inline">mouthSmileRight_median</span> is the single most important feature (SHAP = <span class="num-inline">0.17</span>), reflecting the social-masking smile that bored learners deploy.</p>
+    <p class="subhead">Blendshapes dominate, <span class="num-inline">mouthSmileRight_median</span> is the single most important feature (SHAP = <span class="num-inline">0.17</span>), reflecting the social-masking smile that bored learners deploy.</p>
   </div>
 
   <div class="grid" style="grid-template-columns: 55fr 45fr; gap: 22px; flex: 1; min-height:0;">
@@ -71,15 +71,15 @@
     <!-- RIGHT 45% -->
     <div style="display:flex; flex-direction:column; gap:10px;">
       <div class="card-accent right-card">
-        <div class="ctitle">DOMINANT SIGNAL — Blendshapes · 52D</div>
-        <div class="cbody">AU-based features account for ~60% of top-ranked features. Boredom is primarily a state of facial muscle suppression — the model learns the absence of activation.</div>
+        <div class="ctitle">DOMINANT SIGNAL, Blendshapes · 52D</div>
+        <div class="cbody">AU-based features account for ~60% of top-ranked features. Boredom is primarily a state of facial muscle suppression, the model learns the absence of activation.</div>
       </div>
       <div class="card-accent right-card">
-        <div class="ctitle">SUBTLE RESTLESSNESS — Head Pose · 6D</div>
-        <div class="cbody">Head pose contributes dynamic features — slope, velocity, range — capturing the slow drift and micro-movements of a disengaged learner.</div>
+        <div class="ctitle">SUBTLE RESTLESSNESS, Head Pose · 6D</div>
+        <div class="cbody">Head pose contributes dynamic features, slope, velocity, range, capturing the slow drift and micro-movements of a disengaged learner.</div>
       </div>
       <div class="card-accent right-card">
-        <div class="ctitle">ENGINEERED VALUE-ADD — Composite · 10D</div>
+        <div class="ctitle">ENGINEERED VALUE-ADD, Composite · 10D</div>
         <div class="cbody"><span class="num-inline">combined_gaze_vertical_iqr</span> appears in top-5, confirming the value of cross-group engineered higher-order signals.</div>
       </div>
     </div>
@@ -90,7 +90,7 @@
     <div class="pageno">22 / 34</div>
   </div>
 </div>
-<aside data-notes="" class="hidden">For Boredom, the SHAP analysis reveals a striking finding: mouthSmileRight_median is the single most important feature with a SHAP value of 0.17 — by far the strongest of any feature across all four states. This captures the social-masking smile that bored learners often maintain to appear attentive. The top five is dominated by blendshapes — browInnerUp_range and mouthPressRight_mean reinforce the muscle-suppression signature. Head pose contributes the dynamic head_roll_vel_max_abs, capturing slow disengaged drift. The engineered composite combined_gaze_vertical_iqr rounds out the top five, validating the cross-group feature engineering. Crucially, Boredom relies on a small number of strong features — top SHAP 0.17 is more than twice Confusion's 0.07.</aside>
+<aside data-notes="" class="hidden">For Boredom, the SHAP analysis reveals a striking finding: mouthSmileRight_median is the single most important feature with a SHAP value of 0.17, by far the strongest of any feature across all four states. This captures the social-masking smile that bored learners often maintain to appear attentive. The top five is dominated by blendshapes, browInnerUp_range and mouthPressRight_mean reinforce the muscle-suppression signature. Head pose contributes the dynamic head_roll_vel_max_abs, capturing slow disengaged drift. The engineered composite combined_gaze_vertical_iqr rounds out the top five, validating the cross-group feature engineering. Crucially, Boredom relies on a small number of strong features, top SHAP 0.17 is more than twice Confusion's 0.07.</aside>
 
 
 </body></html>

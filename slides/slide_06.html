@@ -73,10 +73,10 @@
 
     <img class="absolute right-10 top-10" width="75px" src="logo/AMS-Logo.png" alt="AMS Logo">
 
-  <div class="eyebrow">LITERATURE REVIEW · 2016 – 2024</div>
+  <div class="eyebrow">LITERATURE REVIEW · 2016 - 2024</div>
   <div class="accent-bar" style="margin-top:8px;"></div>
   <h1 class="headline">How Prior Work Has Approached DAiSEE</h1>
-  <p class="subhead">A decade of deep-learning approaches — most cluster between 63% and 68% accuracy on the 4-class task. We ask the inverse question.</p>
+  <p class="subhead">A decade of deep-learning approaches, most cluster between 63% and 68% accuracy on the 4-class task. We ask the inverse question.</p>
 
   <div class="lit-grid">
 
@@ -100,14 +100,14 @@
           <tr><td class="year">2022</td><td>Mehta et al.</td><td>3D DenseNet with self-attention</td><td class="metric">63.59% (4-class)</td></tr>
           <tr><td class="year">2022</td><td>Huang et al.</td><td>Optimized ShuffleNet v2 (lightweight CNN + SE)</td><td class="metric">63.9% / F1 0.735</td></tr>
           <tr><td class="year">2021</td><td>Abedi &amp; Khan</td><td>ResNet-50 + Temporal ConvNet</td><td class="metric">63.9% (4-class, 5-fold CV)</td></tr>
-          <tr><td class="year">2016</td><td>Gupta et al.</td><td>Baseline CNNs (InceptionV3, C3D, LRCN)</td><td class="metric">~46–59% per-class</td></tr>
+          <tr><td class="year">2016</td><td>Gupta et al.</td><td>Baseline CNNs (InceptionV3, C3D, LRCN)</td><td class="metric">~46-59% per-class</td></tr>
         </tbody>
       </table>
 
       <div style="margin-top:12px;padding:8px 12px;background:var(--bg-soft);border-radius:6px;" class="">
         <div style="display:flex;justify-content:space-between;align-items:center;" class="">
           <span style="font-family:var(--font-body);font-size:10.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);" class="">4-class accuracy cluster</span>
-          <span style="font-family:var(--font-num);font-size:11px;color:var(--accent-deep);font-weight:600;">63% — 68%</span>
+          <span style="font-family:var(--font-num);font-size:11px;color:var(--accent-deep);font-weight:600;">63%, 68%</span>
         </div>
         <div class="cluster-bar" data-decor="" aria-hidden="true">
           <div class="range" style="box-sizing: border-box; width: 580px; height: 8px; transform: translate(-212px, 0px);"></div>
@@ -122,7 +122,7 @@
         <div class="eyebrow" style="color:var(--accent-deep);font-size:10px;">THE GAP</div>
         <div class="insight-h" style="margin-top:6px;">The gap our work targets</div>
       </div>
-      <p class="insight-b">Almost every entry above requires a deep network trained end-to-end on video frames. We ask the inverse question: how far can a lightweight gradient-boosted tree take us, given the right hand-crafted features?</p>
+      <p class="insight-b">Almost every entry above requires a deep network trained end-to-end on video frames. We ask the inverse question: how far can a lightweight gradient-boosted tree take us, given the right hand-crafted face features?</p>
 
       <div class="stat-row">
         <div class="stat-mini">
@@ -130,14 +130,14 @@
           <div class="l">Studies reviewed</div>
         </div>
         <div class="stat-mini">
-          <div class="n">2016–24</div>
+          <div class="n">2016-24</div>
           <div class="l">Coverage window</div>
         </div>
       </div>
 
       <div style="padding:10px 12px;background:var(--bg-tint);border-radius:6px;">
         <div style="font-family:var(--font-body);font-size:11px;font-weight:700;color:var(--primary);letter-spacing:0.06em;">Closest in spirit</div>
-        <div style="font-family:var(--font-body);font-size:12px;color:var(--text-muted);margin-top:3px;line-height:1.45;">Santoni et al. (2023) — SMOTE on OpenFace features. Our work pushes this lighter path further with XGBoost + MediaPipe.</div>
+        <div style="font-family:var(--font-body);font-size:12px;color:var(--text-muted);margin-top:3px;line-height:1.45;">Santoni et al. (2023), SMOTE on OpenFace features. Our work pushes this lighter path further with XGBoost + MediaPipe.</div>
       </div>
     </div>
 
@@ -150,7 +150,7 @@
 </div>
 
 <aside data-notes="" class="hidden">
-This table summarizes nine representative studies on the DAiSEE benchmark between twenty sixteen and twenty twenty-four. The headline observation is that almost every published approach reports accuracy somewhere between sixty-three and sixty-eight percent on the four-class task, regardless of how sophisticated the deep architecture is — ResNet plus temporal networks, three-dimensional DenseNet with self-attention, EfficientNet plus L-S-T-M, all land in that band. The one outlier is Santoni and colleagues in twenty twenty-three, who reached seventy-eight percent by combining OpenFace features with S-M-O-T-E oversampling; that is the closest in spirit to our approach. The gap our thesis targets is therefore not raw accuracy but computational cost and interpretability — every entry in this table requires a deep network trained end-to-end on video frames. We ask the inverse question: how far can a lightweight gradient-boosted tree take us, given the right hand-crafted features?
+This table summarizes nine representative studies on the DAiSEE benchmark between twenty sixteen and 2020-four. The headline observation is that almost every published approach reports accuracy somewhere between sixty-three and sixty-eight percent on the four-class task, regardless of how sophisticated the deep architecture is, ResNet plus temporal networks, three-dimensional DenseNet with self-attention, EfficientNet plus L-S-T-M, all land in that band. The one outlier is Santoni and colleagues in 2020-three, who reached seventy-eight percent by combining OpenFace features with S-M-O-T-E oversampling; that is the closest in spirit to our approach. The gap our thesis targets is therefore not raw accuracy but computational cost and interpretability, every entry in this table requires a deep network trained end-to-end on video frames. We ask the inverse question: how far can a lightweight gradient-boosted tree take us, given the right hand-crafted features?
 </aside>
 
 

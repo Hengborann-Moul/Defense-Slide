@@ -107,10 +107,10 @@
     <div class="eyebrow">METHODOLOGY · FRAME SELECTION</div>
     <div class="accent-bar" style="margin-top:8px;"></div>
     <h1 class="headline">How Frames Are Extracted and Selected Per Clip</h1>
-    <p class="subhead">Raw DAiSEE video is 30 fps with variable clip duration. We downsample to 15 fps and standardize every clip to 150 frames — about 10 seconds of behavior — to balance temporal resolution against compute cost.</p>
+    <p class="subhead">Raw DAiSEE video is 30 fps with variable clip duration. We downsample to 15 fps and standardize every clip to 150 frames, about 10 seconds of behavior, to balance temporal resolution against compute cost.</p>
 
     <div class="grid mt-4" style="grid-template-columns: 55fr 45fr; gap: 22px;">
-      <!-- LEFT — 4-step process -->
+      <!-- LEFT, 4-step process -->
       <div class="flex flex-col gap-1">
         <div class="step-card">
           <div class="num-cell">01</div>
@@ -140,12 +140,12 @@
           <div class="num-cell">04</div>
           <div>
             <h2><i class="material-icons icon">verified_user</i>Missing-detection handling</h2>
-            <p>Clips with zero face detections are excluded. Clips with partial detections must retain at least 150 frames with valid face features — quality control that ensures reliable feature representations.</p>
+            <p>Clips with zero face detections are excluded. Clips with partial detections must retain at least 150 frames with valid face features, quality control that ensures reliable feature representations.</p>
           </div>
         </div>
       </div>
 
-      <!-- RIGHT — Output tensor + why -->
+      <!-- RIGHT, Output tensor + why -->
       <div>
         <div class="tensor-card">
           <div class="eyebrow">OUTPUT TENSOR</div>
@@ -158,14 +158,14 @@
           </div>
         </div>
 
-        <div class="why-card">
+        <!--<div class="why-card">
           <div class="kicker" style="font-weight:700; letter-spacing:0.14em; text-transform:uppercase;">Why 150 frames?</div>
           <ul>
             <li><b>30 frames</b> → too short, misses slow boredom drift</li>
             <li><b>150 frames</b> → elbow point (see Slide 28 ablation)</li>
             <li><b>300 frames</b> → plateau, adds transition noise</li>
           </ul>
-        </div>
+        </div>-->
       </div>
     </div>
 
@@ -175,7 +175,7 @@
     </footer>
   </div>
 
-  <aside data-notes="" class="hidden">Frame extraction begins with a deliberate 30-to-15 fps downsample — we skip every other frame. This halves the compute budget without losing meaningful expression dynamics, because most facial actions live below 5 Hz. We then standardize every clip to 150 frames, roughly 10 seconds at 15 fps. For longer clips we sample at uniform intervals to preserve temporal structure; for shorter clips we repeat the final frame. The 150-frame choice is not arbitrary — it is the elbow point in the ablation on slide 28, after which performance plateaus and transition noise creeps in. Finally, quality control drops clips with zero face detections, which removes roughly 5 percent of the corpus. The output tensor X lives in R to the N by 150 by 78, where N is the number of clips, 150 is the sequence length, and 78 is the per-frame feature dimensionality.</aside>
+  <aside data-notes="" class="hidden">Frame extraction begins with a deliberate 30-to-15 fps downsample, we skip every other frame. This halves the compute budget without losing meaningful expression dynamics, because most facial actions live below 5 Hz. We then standardize every clip to 150 frames, roughly 10 seconds at 15 fps. For longer clips we sample at uniform intervals to preserve temporal structure; for shorter clips we repeat the final frame. The 150-frame choice is not arbitrary, it is the elbow point in the ablation on slide 28, after which performance plateaus and transition noise creeps in. Finally, quality control drops clips with zero face detections, which removes roughly 5 percent of the corpus. The output tensor X lives in R to the N by 150 by 78, where N is the number of clips, 150 is the sequence length, and 78 is the per-frame feature dimensionality.</aside>
 
 
 </body></html>

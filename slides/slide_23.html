@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8">
-<title>SHAP — Engagement · Slide 23</title>
+<title>SHAP: Engagement · Slide 23</title>
 <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
 <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="global.css">
@@ -36,7 +36,7 @@
     <div class="eyebrow">RQ2 · SHAP ANALYSIS · ENGAGEMENT</div>
     <div class="accent-bar" style="margin-top:8px;"></div>
     <h1 class="headline">Engagement is Captured by Higher-Order Patterns</h1>
-    <p class="subhead">A striking contrast with Boredom — engineered composite and eye-activity features occupy the top ranks. Engagement is captured by engineered higher-order signals more than raw muscle activations.</p>
+    <p class="subhead">A striking contrast with Boredom, engineered composite and eye-activity features occupy the top ranks. Engagement is captured by engineered higher-order signals more than raw muscle activations.</p>
   </div>
 
   <div class="grid" style="grid-template-columns: 55fr 45fr; gap: 22px; flex: 1; min-height:0;">
@@ -71,16 +71,16 @@
     <!-- RIGHT 45% -->
     <div style="display:flex; flex-direction:column; gap:10px;">
       <div class="card-accent right-card">
-        <div class="ctitle">TOP-RANK REVERSAL — Composite · 10D</div>
-        <div class="cbody">Composite and cross-group features occupy the top ranks — a striking contrast with Boredom and Confusion, where blendshapes dominated. Engagement is captured by engineered higher-order signals.</div>
+        <div class="ctitle">TOP-RANK REVERSAL, Composite · 10D</div>
+        <div class="cbody">Composite and cross-group features occupy the top ranks, a striking contrast with Boredom and Confusion, where blendshapes dominated. Engagement is captured by engineered higher-order signals.</div>
       </div>
       <div class="card-accent right-card">
-        <div class="ctitle">EYE ACTIVITY DOMINATES — Composite</div>
-        <div class="cbody"><span class="num-inline">eye_activity_max</span> (<span class="num-inline">0.19</span>) is the single highest SHAP value across all four states. Engaged learners exhibit active visual exploration — blinks, saccades, pupil changes aggregated into one activity measure.</div>
+        <div class="ctitle">EYE ACTIVITY DOMINATES, Composite</div>
+        <div class="cbody"><span class="num-inline">eye_activity_max</span> (<span class="num-inline">0.19</span>) is the single highest SHAP value across all four states. Engaged learners exhibit active visual exploration, blinks, saccades, pupil changes aggregated into one activity measure.</div>
       </div>
       <div class="card-accent right-card">
-        <div class="ctitle">INVERSE BOREDOM SIGNAL — Cross-Group</div>
-        <div class="cbody"><span class="num-inline">corr_boredom_related_jaw</span> appears with negative SHAP — high correlation between jaw dynamics and boredom indicators pushes the prediction AWAY from engagement.</div>
+        <div class="ctitle">INVERSE BOREDOM SIGNAL, Cross-Group</div>
+        <div class="cbody"><span class="num-inline">corr_boredom_related_jaw</span> appears with negative SHAP, high correlation between jaw dynamics and boredom indicators pushes the prediction AWAY from engagement.</div>
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@
     <div class="pageno">23 / 34</div>
   </div>
 </div>
-<aside data-notes="" class="hidden">Engagement is the only state where composite features beat blendshapes at the top of the SHAP ranking. eye_activity_max carries a SHAP value of 0.19 — the single highest value across all four states. This validates the feature engineering pipeline: raw MediaPipe output alone would have missed this signal. eye_activity_p75 reinforces the eye-activity story, while corr_boredom_related_jaw and corr_composite_mouth show that cross-group correlation features matter. The boredom_indicator_std composite appears with negative SHAP, pushing predictions away from engagement when boredom-like jaw dynamics are present. Theoretically, this means engagement is not about facial muscle activation per se — it is about coordinated, active visual exploration.</aside>
+<aside data-notes="" class="hidden">Engagement is the only state where composite features beat blendshapes at the top of the SHAP ranking. eye_activity_max carries a SHAP value of 0.19, the single highest value across all four states. This validates the feature engineering pipeline: raw MediaPipe output alone would have missed this signal. eye_activity_p75 reinforces the eye-activity story, while corr_boredom_related_jaw and corr_composite_mouth show that cross-group correlation features matter. The boredom_indicator_std composite appears with negative SHAP, pushing predictions away from engagement when boredom-like jaw dynamics are present. Theoretically, this means engagement is not about facial muscle activation per se, it is about coordinated, active visual exploration.</aside>
 
 
 </body></html>

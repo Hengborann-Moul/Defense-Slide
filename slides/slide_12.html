@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="UTF-8">
-  <title>Dataset — DAiSEE</title>
+  <title>Dataset: DAiSEE</title>
   <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
   <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="global.css">
@@ -44,7 +44,7 @@
 
     <div class="eyebrow">METHODOLOGY · DATASET</div>
     <div class="accent-bar" style="margin-top:8px;"></div>
-    <h1 class="headline">DAiSEE — The First Multi-Label Affective Video Benchmark</h1>
+    <h1 class="headline">DAiSEE, The First Multi-Label Affective Video Benchmark</h1>
     <p class="subhead">Crowd-annotated against a gold standard created by a team of expert psychologists. Four affective states, four intensity levels, severe class imbalance.</p>
 
     <!-- Top stat row -->
@@ -52,7 +52,7 @@
       <div class="stat-card">
         <div class="num">9,068</div>
         <div class="lbl">Short video clips</div>
-        <div class="sub">10–60 s each, 30 fps</div>
+        <div class="sub">~10s each, 30 fps</div>
       </div>
       <div class="stat-card">
         <div class="num">112</div>
@@ -128,7 +128,7 @@
         <i class="material-icons" style="color: var(--accent); font-size: 22px;">warning_amber</i>
         <div>
           <div style="font-family: var(--font-heading); font-weight: 700; font-size: 13px; color: var(--primary-soft);">Why this imbalance is the central methodological challenge</div>
-          <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-top: 2px;">For Boredom, Confusion, and Frustration, the vast majority of clips fall into Very Low or Low — the model sees only a fraction of the high-intensity examples it needs to learn from. We address this with SMOTE + class weighting + Focal Loss (see Slide 18).</div>
+          <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-top: 2px;">For Boredom, Confusion, and Frustration, the vast majority of clips fall into Very Low or Low, the model sees only a fraction of the high-intensity examples it needs to learn from. We address this with SMOTE + class weighting + Focal Loss (see Slide 18).</div>
         </div>
       </div>
     </div>
@@ -139,7 +139,7 @@
     </footer>
   </div>
 
-  <aside data-notes="" class="hidden">DAiSEE is the first multi-label affective video benchmark for e-learning — 9,068 short clips from 112 participants, crowd-annotated against a gold standard created by expert psychologists. Each clip is labelled across four states: Boredom, Confusion, Engagement and Frustration, with four intensity levels each. The headline challenge is imbalance. Look at the Frustration row: 6,986 Very Low clips versus only 87 Very High, an 80-to-1 ratio. Engagement is the inverse — heavily skewed toward High. This is why we collapse the four intensity levels into three actionable classes in the next slide, and why imbalance handling via SMOTE, class weighting and Focal Loss is non-negotiable throughout the methodology.</aside>
+  <aside data-notes="" class="hidden">DAiSEE is the first multi-label affective video benchmark for e-learning, 9,068 short clips from 112 participants, crowd-annotated against a gold standard created by expert psychologists. Each clip is labelled across four states: Boredom, Confusion, Engagement and Frustration, with four intensity levels each. The headline challenge is imbalance. Look at the Frustration row: 6,986 Very Low clips versus only 87 Very High, an 80-to-1 ratio. Engagement is the inverse, heavily skewed toward High. This is why we collapse the four intensity levels into three actionable classes in the next slide, and why imbalance handling via SMOTE, class weighting and Focal Loss is non-negotiable throughout the methodology.</aside>
 
 
 </body></html>

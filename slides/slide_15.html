@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="UTF-8">
-  <title>Facial Feature Extraction — MediaPipe 78D</title>
+  <title>Facial Feature Extraction: MediaPipe 78D</title>
   <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
   <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="global.css">
@@ -102,7 +102,7 @@
 
     <div class="eyebrow">METHODOLOGY · MEDIAPIPE 78D</div>
     <div class="accent-bar" style="margin-top:8px;"></div>
-    <h1 class="headline">Facial Feature Extraction — 78 Dimensions Per Frame</h1>
+    <h1 class="headline">Facial Feature Extraction, 78 Dimensions Per Frame</h1>
     <p class="subhead">MediaPipe Face Landmarker provides 468 landmarks + 52 blendshape coefficients. We compose them into a 78-dimensional per-frame vector organized into five semantic groups.</p>
 
     <!-- Top: 5 cards -->
@@ -144,12 +144,12 @@
       <div class="sub-card">
         <div class="kicker"><i class="material-icons" style="font-size:13px;">view_module</i>SEMANTIC SUB-GROUPS</div>
         <div class="row">
-          <span class="pill">Eyebrow (idx 0–4)</span>
-          <span class="pill">Eye (8–21)</span>
-          <span class="pill">Jaw (21–24)</span>
-          <span class="pill">Mouth (25–49)</span>
-          <span class="pill">Nose (50–51)</span>
-          <span class="pill">Cheek (5–6)</span>
+          <span class="pill">Eyebrow (idx 0-4)</span>
+          <span class="pill">Eye (8-21)</span>
+          <span class="pill">Jaw (21-24)</span>
+          <span class="pill">Mouth (25-49)</span>
+          <span class="pill">Nose (50-51)</span>
+          <span class="pill">Cheek (5-6)</span>
         </div>
       </div>
       <div class="sub-card">
@@ -180,7 +180,7 @@
     </footer>
   </div>
 
-  <aside data-notes="" class="hidden">MediaPipe Face Landmarker gives us 468 landmarks and 52 blendshape coefficients per frame. We compose these into a 78-dimensional vector organized into five semantic groups. The first group is the 52 raw blendshapes, the per-action-unit facial muscle activations across eyebrow, eye, jaw, mouth, nose and cheek. The second is 6-D head pose — pitch, yaw, roll plus 3-D position. The third is 6-D eye gaze, computed from blendshapes. The fourth is a 10-D composite group that we engineer ourselves: regional activity levels, symmetry, and state-specific indicators — this is not raw MediaPipe output. The fifth is a 4-D dynamics group: animation level, expression intensity, active region count, and facial tension. The state-specific sub-groups encode our prior about which features should matter per state — the SHAP analysis on slides 22 to 25 will validate this empirically. Throughput is 30-plus frames per second on a single CPU, roughly 3 milliseconds per frame including MediaPipe inference.</aside>
+  <aside data-notes="" class="hidden">MediaPipe Face Landmarker gives us 468 landmarks and 52 blendshape coefficients per frame. We compose these into a 78-dimensional vector organized into five semantic groups. The first group is the 52 raw blendshapes, the per-action-unit facial muscle activations across eyebrow, eye, jaw, mouth, nose and cheek. The second is 6-D head pose, pitch, yaw, roll plus 3-D position. The third is 6-D eye gaze, computed from blendshapes. The fourth is a 10-D composite group that we engineer ourselves: regional activity levels, symmetry, and state-specific indicators, this is not raw MediaPipe output. The fifth is a 4-D dynamics group: animation level, expression intensity, active region count, and facial tension. The state-specific sub-groups encode our prior about which features should matter per state, the SHAP analysis on slides 22 to 25 will validate this empirically. Throughput is 30-plus frames per second on a single CPU, roughly 3 milliseconds per frame including MediaPipe inference.</aside>
 
 
 </body></html>

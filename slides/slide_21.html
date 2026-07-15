@@ -22,7 +22,7 @@
     <div class="eyebrow">RQ3 · PER-CLASS BREAKDOWN</div>
     <div class="accent-bar" style="margin-top:8px;"></div>
     <h1 class="headline">Frustration is Easiest. Confusion is Hardest.</h1>
-    <p class="subhead">Per-class metrics on the held-out 10% test set — and the confusion-matrix patterns that reveal where the model breaks.</p>
+    <p class="subhead">Per-class metrics on the held-out 10% test set, and the confusion-matrix patterns that reveal where the model breaks.</p>
   </div>
 
   <table class="data" style="margin-bottom:14px;">
@@ -41,18 +41,18 @@
       <tr><td class="state">Engagement</td><td class="num">0.610</td><td class="num">0.609</td><td class="num">0.589</td><td class="num">0.609</td><td class="num">851</td></tr>
       <tr><td class="state">Confusion</td><td class="num">0.597</td><td class="num">0.676</td><td class="num">0.566</td><td class="num">0.676</td><td class="num">851</td></tr>
       <tr><td class="state">Frustration</td><td class="num">0.644</td><td class="num">0.786</td><td class="num">0.694</td><td class="num">0.786</td><td class="num">851</td></tr>
-      <tr class="total"><td>Mean</td><td class="num">0.598</td><td class="num">0.655</td><td class="num">0.596</td><td class="num">0.655</td><td class="num">—</td></tr>
+      <tr class="total"><td>Mean</td><td class="num">0.598</td><td class="num">0.655</td><td class="num">0.596</td><td class="num">0.655</td><td class="num">N/A</td></tr>
     </tbody>
   </table>
 
   <div class="grid grid-cols-2 gap-4" style="margin-bottom:12px;">
     <div class="card-accent insight-card">
       <div class="ctitle">WHY FRUSTRATION IS EASIEST (ACC = 0.786)</div>
-      <p class="cbody">Frustration produces distinctive muscular tension patterns — pressed lips, clenched jaw, brow furrow. These blendshape signatures survive the statistical aggregation step cleanly and give XGBoost strong separability. <span style="color:var(--warn); font-weight:700;">CAVEAT:</span> 0.786 accuracy is inflated by the Low-class dominance — Frustration Medium/High recall collapses to 0.</p>
+      <p class="cbody">Frustration produces distinctive muscular tension patterns, pressed lips, clenched jaw, brow furrow. These blendshape signatures survive the statistical aggregation step cleanly and give XGBoost strong separability. <span style="color:var(--warn); font-weight:700;">CAVEAT:</span> 0.786 accuracy is inflated by the Low-class dominance, Frustration Medium/High recall collapses to 0.</p>
     </div>
     <div class="card-accent insight-card">
       <div class="ctitle">WHY CONFUSION IS HARDEST (F1 = 0.566)</div>
-      <p class="cbody">Confusion distributes its discriminative signal across many weak features (see Slide 24). The model defaults to predicting Low for 98% of confusion samples — recall on Medium and High drops to <span style="font-family:var(--font-num); font-weight:600;">0.040</span> and <span style="font-family:var(--font-num); font-weight:600;">0.012</span>.</p>
+      <p class="cbody">Confusion distributes its discriminative signal across many weak features (see Slide 24). The model defaults to predicting Low for 98% of confusion samples, recall on Medium and High drops to <span style="font-family:var(--font-num); font-weight:600;">0.040</span> and <span style="font-family:var(--font-num); font-weight:600;">0.012</span>.</p>
     </div>
   </div>
 
@@ -65,7 +65,7 @@
     <div class="pageno">21 / 34</div>
   </div>
 </div>
-<aside data-notes="" class="hidden">Walking through the per-class table on the held-out ten-percent test set: Boredom reaches 0.548 accuracy with precision and recall both around 0.54; Engagement improves to 0.609 with the best F1 among raw states at 0.589; Confusion shows the inverse pattern, with high recall 0.676 but low F1 0.566 because the model defaults to Low; Frustration leads at 0.786 accuracy. The two edge cases are essential: Frustration looks easy but is inflated by Low-class dominance — its Medium and High recall collapses to zero. Confusion is genuinely hard because its discriminative signal is distributed across many weak features. The SHAP slides that follow explain WHY each state behaves this way.</aside>
+<aside data-notes="" class="hidden">Walking through the per-class table on the held-out ten-percent test set: Boredom reaches 0.548 accuracy with precision and recall both around 0.54; Engagement improves to 0.609 with the best F1 among raw states at 0.589; Confusion shows the inverse pattern, with high recall 0.676 but low F1 0.566 because the model defaults to Low; Frustration leads at 0.786 accuracy. The two edge cases are essential: Frustration looks easy but is inflated by Low-class dominance, its Medium and High recall collapses to zero. Confusion is genuinely hard because its discriminative signal is distributed across many weak features. The SHAP slides that follow explain WHY each state behaves this way.</aside>
 
 
 </body></html>

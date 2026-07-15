@@ -177,7 +177,7 @@
 
     <!-- Two side-by-side cards -->
     <div class="grid grid-cols-2 gap-4 mt-3">
-      <!-- LEFT — Hyperparameters -->
+      <!-- LEFT, Hyperparameters -->
       <div class="hp-card">
         <div class="eyebrow">XGBOOST HYPERPARAMETERS</div>
         <h3>Tuned via 5-fold CV on training fold</h3>
@@ -196,7 +196,7 @@
         </div>
       </div>
 
-      <!-- RIGHT — Imbalance handling -->
+      <!-- RIGHT, Imbalance handling -->
       <div class="imb-card">
         <div class="eyebrow">IMBALANCE HANDLING</div>
         <h3>Three complementary pressures</h3>
@@ -204,7 +204,7 @@
         <div class="imb-block">
           <div class="badge">a</div>
           <div class="text">
-            <b>Data level — SMOTE</b>
+            <b>Data level, SMOTE</b>
             k=5 neighbors, applied to training split only. Linear interpolation in feature space.
           </div>
         </div>
@@ -212,7 +212,7 @@
         <div class="imb-block">
           <div class="badge">b</div>
           <div class="text">
-            <b>Algorithmic level — Class Weights</b>
+            <b>Algorithmic level, Class Weights</b>
             Inverse-frequency weighting. Forces higher penalty on minority-class errors.
             <span class="formula">w_c = N / (K · N_c)</span>
           </div>
@@ -221,7 +221,7 @@
         <div class="imb-block">
           <div class="badge">c</div>
           <div class="text">
-            <b>Loss level — Focal Loss</b>
+            <b>Loss level, Focal Loss</b>
             Custom objective with explicit gradient/Hessian. Down-weights well-classified easy examples.
             <span class="formula">α = 0.25, γ = 2.0</span>
           </div>
@@ -241,7 +241,7 @@
     </footer>
   </div>
 
-  <aside data-notes="" class="hidden">We train four independent XGBoost classifiers, one per affective state — boredom, engagement, confusion and frustration. The justification for four independent models rather than a shared-weight multi-task head is that the per-state feature dependencies differ enough that shared weights hurt minority states. Each model uses max_depth 8, learning_rate 0.05, 500 estimators, subsample 0.8, colsample_bytree 0.8, min_child_weight 3, gamma 0.1, reg_alpha 0.1, reg_lambda 1.0, multi:softprob objective, and 50-round early stopping — all tuned via 5-fold cross-validation on the training fold. Imbalance is attacked at three levels: data via SMOTE with k=5 neighbors applied to the training split only; algorithmic via inverse-frequency class weights w_c equals N over K times N_c; and loss via Focal Loss with alpha 0.25 and gamma 2.0, originally proposed for object detection and adapted here as a custom XGBoost objective with explicit gradient and Hessian. Finally, isotonic regression calibrates the tree-ensemble probabilities, and a threshold search in 0.2 to 0.8 maximizes Macro F1.</aside>
+  <aside data-notes="" class="hidden">We train four independent XGBoost classifiers, one per affective state, boredom, engagement, confusion and frustration. The justification for four independent models rather than a shared-weight multi-task head is that the per-state feature dependencies differ enough that shared weights hurt minority states. Each model uses max_depth 8, learning_rate 0.05, 500 estimators, subsample 0.8, colsample_bytree 0.8, min_child_weight 3, gamma 0.1, reg_alpha 0.1, reg_lambda 1.0, multi:softprob objective, and 50-round early stopping, all tuned via 5-fold cross-validation on the training fold. Imbalance is attacked at three levels: data via SMOTE with k=5 neighbors applied to the training split only; algorithmic via inverse-frequency class weights w_c equals N over K times N_c; and loss via Focal Loss with alpha 0.25 and gamma 2.0, originally proposed for object detection and adapted here as a custom XGBoost objective with explicit gradient and Hessian. Finally, isotonic regression calibrates the tree-ensemble probabilities, and a threshold search in 0.2 to 0.8 maximizes Macro F1.</aside>
 
 
 </body></html>

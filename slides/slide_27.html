@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8">
-<title>Permutation Importance — Cross-State Summary · Slide 27</title>
+<title>Permutation Importance: Cross-State Summary · Slide 27</title>
 <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
 <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="global.css">
@@ -69,7 +69,7 @@
     <div class="eyebrow">RQ2 · PERMUTATION IMPORTANCE · CROSS-STATE</div>
     <div class="accent-bar" style="margin-top:8px;"></div>
     <h1 class="headline">Feature-Group Prominence Shifts Across the Four States</h1>
-    <p class="subhead">Permutation importance validates the SHAP rankings and reveals the per-state feature fingerprint — no single feature group carries all four emotions.</p>
+    <p class="subhead">Permutation importance validates the SHAP rankings and reveals the per-state feature fingerprint, no single feature group carries all four emotions.</p>
   </div>
 
   <table class="matrix" style="margin-bottom:14px;">
@@ -92,9 +92,9 @@
       </tr>
       <tr>
         <td class="row-head">Head Pose <span class="dim">· 6D</span></td>
-        <td><span class="dots dot-medium">●●○</span><span class="cell-note">Dynamic — velocity, range</span></td>
+        <td><span class="dots dot-medium">●●○</span><span class="cell-note">Dynamic, velocity, range</span></td>
         <td><span class="dots dot-light">●○○</span><span class="cell-note">Minimal</span></td>
-        <td><span class="dots dot-medium">●●○</span><span class="cell-note">Mean orientation — yaw</span></td>
+        <td><span class="dots dot-medium">●●○</span><span class="cell-note">Mean orientation, yaw</span></td>
         <td><span class="dots dot-medium">●●○</span><span class="cell-note">Dynamic, shared w/ Boredom</span></td>
       </tr>
       <tr>
@@ -123,7 +123,7 @@
 
   <div class="card-soft takeaway-card" style="border-left: 3px solid var(--accent);">
     <div class="ctitle">THE SINGLE MOST IMPORTANT TAKEAWAY FROM RQ2</div>
-    <div class="cbody">No single feature group carries all four emotions. Each affective state has its own fingerprint — <span style="color:var(--primary); font-weight:700;">Boredom</span> is blendshapes, <span style="color:var(--primary); font-weight:700;">Engagement</span> is composite + gaze, <span style="color:var(--primary); font-weight:700;">Confusion</span> is composite + head orientation, <span style="color:var(--primary); font-weight:700;">Frustration</span> is mouth/jaw blendshapes + bursting dynamics. This validates the multi-group feature engineering pipeline.</div>
+    <div class="cbody">No single feature group carries all four emotions. Each affective state has its own fingerprint, <span style="color:var(--primary); font-weight:700;">Boredom</span> is blendshapes, <span style="color:var(--primary); font-weight:700;">Engagement</span> is composite + gaze, <span style="color:var(--primary); font-weight:700;">Confusion</span> is composite + head orientation, <span style="color:var(--primary); font-weight:700;">Frustration</span> is mouth/jaw blendshapes + bursting dynamics. This validates the multi-group feature engineering pipeline.</div>
   </div>
 
   <div class="slide-footer">
@@ -131,7 +131,7 @@
     <div class="pageno">27 / 34</div>
   </div>
 </div>
-<aside data-notes="" class="hidden">Permutation importance is a model-agnostic validation of the SHAP rankings — it measures how much accuracy drops when each feature group is randomly shuffled. The matrix tells a clear per-state story. Engagement is the only column where Eye Gaze hits the strong three-dot rating, confirming the active-visual-exploration signature. Frustration is the only column where blendshapes hit strong alongside dynamics, capturing muscular tension and bursting patterns. Confusion leans on composite plus head orientation. Boredom is blendshape-dominant. The single most important takeaway from RQ2 is the punchline: no single feature group carries all four emotions. Each state has its own fingerprint. The multi-group feature engineering pipeline was necessary — no single group would have sufficed.</aside>
+<aside data-notes="" class="hidden">Permutation importance is a model-agnostic validation of the SHAP rankings, it measures how much accuracy drops when each feature group is randomly shuffled. The matrix tells a clear per-state story. Engagement is the only column where Eye Gaze hits the strong three-dot rating, confirming the active-visual-exploration signature. Frustration is the only column where blendshapes hit strong alongside dynamics, capturing muscular tension and bursting patterns. Confusion leans on composite plus head orientation. Boredom is blendshape-dominant. The single most important takeaway from RQ2 is the punchline: no single feature group carries all four emotions. Each state has its own fingerprint. The multi-group feature engineering pipeline was necessary, no single group would have sufficed.</aside>
 
 
 </body></html>

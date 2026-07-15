@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8">
-<title>SHAP — Confusion · Slide 24</title>
+<title>SHAP: Confusion · Slide 24</title>
 <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
 <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="global.css">
@@ -36,7 +36,7 @@
     <div class="eyebrow">RQ2 · SHAP ANALYSIS · CONFUSION</div>
     <div class="accent-bar" style="margin-top:8px;"></div>
     <h1 class="headline">Confusion is in Distributed Weak Signals, Not One Dominant Feature</h1>
-    <p class="subhead">Top SHAP value is only <span class="num-inline">0.07</span> — five times weaker than Boredom's <span class="num-inline">0.17</span>. Confusion distributes its discriminative signal across many weak features, which is why the classifier defaults to predicting Low.</p>
+    <p class="subhead">Top SHAP value is only <span class="num-inline">0.07</span>, five times weaker than Boredom's <span class="num-inline">0.17</span>. Confusion distributes its discriminative signal across many weak features, which is why the classifier defaults to predicting Low.</p>
   </div>
 
   <div class="grid" style="grid-template-columns: 55fr 45fr; gap: 22px; flex: 1; min-height:0;">
@@ -71,16 +71,16 @@
     <!-- RIGHT 45% -->
     <div style="display:flex; flex-direction:column; gap:10px;">
       <div class="card-accent right-card">
-        <div class="ctitle">TOP-RANK COMPOSITE — Composite · 10D</div>
-        <div class="cbody"><span class="num-inline">boredom_indicator_vel_std</span> is the top feature — a cross-emotion signal. Confusion and boredom share attentional-disruption mechanisms (D'Mello &amp; Graesser).</div>
+        <div class="ctitle">TOP-RANK COMPOSITE, Composite · 10D</div>
+        <div class="cbody"><span class="num-inline">boredom_indicator_vel_std</span> is the top feature, a cross-emotion signal. Confusion and boredom share attentional-disruption mechanisms (D'Mello &amp; Graesser).</div>
       </div>
       <div class="card-accent right-card">
-        <div class="ctitle">GAZE-PATTERN SIGNAL — Eye Gaze · 6D</div>
-        <div class="cbody"><span class="num-inline">eyeLookDownLeft_kurtosis</span> captures occasional intense downward glances — information-seeking behavior of confused learners. High kurtosis = heavy-tail = rare but intense events.</div>
+        <div class="ctitle">GAZE-PATTERN SIGNAL, Eye Gaze · 6D</div>
+        <div class="cbody"><span class="num-inline">eyeLookDownLeft_kurtosis</span> captures occasional intense downward glances, information-seeking behavior of confused learners. High kurtosis = heavy-tail = rare but intense events.</div>
       </div>
       <div class="card-accent right-card">
-        <div class="ctitle">WEAK DISTRIBUTED SIGNATURE — All categories</div>
-        <div class="cbody">Confusion has no single dominant feature. The classifier spreads its decision across many weak signals — explaining the Low-class collapse seen in the confusion matrix.</div>
+        <div class="ctitle">WEAK DISTRIBUTED SIGNATURE, All categories</div>
+        <div class="cbody">Confusion has no single dominant feature. The classifier spreads its decision across many weak signals, explaining the Low-class collapse seen in the confusion matrix.</div>
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@
     <div class="pageno">24 / 34</div>
   </div>
 </div>
-<aside data-notes="" class="hidden">Confusion is the hardest state to classify, and SHAP explains why: the top SHAP value is only 0.07 — five times weaker than Boredom's 0.17. The discriminative signal is distributed across many weak features rather than concentrated in one. The top feature, boredom_indicator_vel_std, is a cross-emotion composite, theoretically linking Confusion to Boredom via D'Mello and Graesser's attentional-control theory — both states involve attentional disruption. The eye-gaze feature eyeLookDownLeft_kurtosis captures rare intense downward glances that signal information-seeking. Because no single feature dominates, the classifier defaults to predicting Low for ninety-eight percent of confusion samples. This is precisely why Confusion may benefit most from multimodal features — mouse, scroll, response time — in future work.</aside>
+<aside data-notes="" class="hidden">Confusion is the hardest state to classify, and SHAP explains why: the top SHAP value is only 0.07, five times weaker than Boredom's 0.17. The discriminative signal is distributed across many weak features rather than concentrated in one. The top feature, boredom_indicator_vel_std, is a cross-emotion composite, theoretically linking Confusion to Boredom via D'Mello and Graesser's attentional-control theory, both states involve attentional disruption. The eye-gaze feature eyeLookDownLeft_kurtosis captures rare intense downward glances that signal information-seeking. Because no single feature dominates, the classifier defaults to predicting Low for ninety-eight percent of confusion samples. This is precisely why Confusion may benefit most from multimodal features, mouse, scroll, response time, in future work.</aside>
 
 
 </body></html>

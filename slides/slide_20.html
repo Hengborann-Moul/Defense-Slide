@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="UTF-8">
-  <title>RQ1 — Performance Comparison</title>
+  <title>RQ1: Performance Comparison</title>
   <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
   <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="global.css">
@@ -122,7 +122,7 @@
     <p class="subhead">Compared against 15 published baselines on the same DAiSEE 4-class task. Above the deep-learning median (63.9%) with a model that fits in &lt;1 MB.</p>
 
     <div class="grid mt-3" style="grid-template-columns: 65fr 35fr; gap: 16px;">
-      <!-- LEFT — Bar chart -->
+      <!-- LEFT, Bar chart -->
       <div>
         <div class="bar-chart">
           <!-- 16 bars -->
@@ -220,15 +220,15 @@
         <!-- Answer callout -->
         <div class="answer-card">
           <span class="badge">RQ1</span>
-          <span class="text"><b>ANSWERED:</b> A lightweight XGBoost classifier matches or exceeds the median deep-learning baseline on DAiSEE — at a fraction of the compute cost.</span>
+          <span class="text"><b>ANSWERED:</b> A lightweight XGBoost classifier matches or exceeds the median deep-learning baseline on DAiSEE, at a fraction of the compute cost.</span>
         </div>
       </div>
 
-      <!-- RIGHT — Stats column -->
+      <!-- RIGHT, Stats column -->
       <div class="flex flex-col gap-2.5">
         <div class="stat-tile accent">
           <div class="num teal">65.26%</div>
-          <div class="lbl">Proposed XGBoost — 4-class accuracy</div>
+          <div class="lbl">Proposed XGBoost, 4-class accuracy</div>
         </div>
         <div class="stat-tile">
           <div class="num navy">63.9%</div>
@@ -240,7 +240,7 @@
         </div>
         <div style="font-family: var(--font-body); font-size: 10.5px; color: var(--text-soft); line-height: 1.5; padding: 4px 4px 0;">
           <i class="material-icons" style="font-size: 12px; vertical-align: middle; color: var(--accent);">info</i>
-          Bars sorted ascending. Proposed method highlighted teal. SOTA (Santoni et al., 77.97%) uses SMOTE on OpenFace features — same recipe as ours, but with deep representations.
+          Bars sorted ascending. Proposed method highlighted teal. SOTA (Santoni et al., 77.97%) uses SMOTE on OpenFace features, same recipe as ours, but with deep representations.
         </div>
       </div>
     </div>
@@ -251,7 +251,7 @@
     </footer>
   </div>
 
-  <aside data-notes="" class="hidden">This is RQ1 — does our lightweight XGBoost model compete with deep-learning baselines on DAiSEE? The bar chart shows sixteen methods sorted ascending by 4-class accuracy. The proposed model, highlighted in teal, lands at 65.26 percent — above the deep-learning median of 63.9 percent, a 1.36 percentage-point margin, with a model that fits in under one megabyte versus 100-plus megabytes for the deep models. I want to acknowledge Santoni et al. at 77.97 percent as the current SOTA — but note that it uses SMOTE on OpenFace features, which is essentially our recipe with deep features instead of MediaPipe blendshapes. The takeaway: a lightweight gradient-boosted classifier matches or exceeds the median deep-learning baseline on the same DAiSEE 4-class task, at a fraction of the compute cost.</aside>
+  <aside data-notes="" class="hidden">This is RQ1, does our lightweight XGBoost model compete with deep-learning baselines on DAiSEE? The bar chart shows sixteen methods sorted ascending by 4-class accuracy. The proposed model, highlighted in teal, lands at 65.26 percent, above the deep-learning median of 63.9 percent, a 1.36 percentage-point margin, with a model that fits in under one megabyte versus 100-plus megabytes for the deep models. I want to acknowledge Santoni et al. at 77.97 percent as the current SOTA, but note that it uses SMOTE on OpenFace features, which is essentially our recipe with deep features instead of MediaPipe blendshapes. The takeaway: a lightweight gradient-boosted classifier matches or exceeds the median deep-learning baseline on the same DAiSEE 4-class task, at a fraction of the compute cost.</aside>
 
 
 </body></html>

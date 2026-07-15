@@ -1,6 +1,6 @@
 <html lang="en"><head>
   <meta charset="UTF-8">
-  <title>Feature Engineering — 5 Categories to 2152D</title>
+  <title>Feature Engineering: 5 Categories to 2152D</title>
   <script src="https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com" data-z-original-src="https://cdn.tailwindcss.com"></script>
   <link href="https://artifacts-cdn.chatglm.site/https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" data-z-original-href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="global.css">
@@ -138,7 +138,7 @@
     <div class="eyebrow">METHODOLOGY · FEATURE ENGINEERING</div>
     <div class="accent-bar" style="margin-top:8px;"></div>
     <h1 class="headline">How 150 Frames Become One Feature Row</h1>
-    <p class="subhead">Raw MediaPipe output is a (150 × 78) matrix. Per-frame spatial information alone cannot separate boredom from confusion — temporal dynamics must be encoded explicitly. A 5-category pipeline transforms it into a fixed-length 2,152-dimensional feature vector.</p>
+    <p class="subhead">Raw MediaPipe output is a (150 × 78) matrix. Per-frame spatial information alone cannot separate boredom from confusion, temporal dynamics must be encoded explicitly. A 5-category pipeline transforms it into a fixed-length 2,152-dimensional feature vector.</p>
 
     <!-- Input block -->
     <div class="flex justify-center mt-3">
@@ -148,7 +148,7 @@
           <div class="formula">(150 × 78)</div>
         </div>
         <div style="width:1px; height:32px; background: var(--border);"></div>
-        <div class="lbl">Raw MediaPipe matrix — blendshapes, head pose, gaze, composites, dynamics.</div>
+        <div class="lbl">Raw MediaPipe matrix, blendshapes, head pose, gaze, composites, dynamics.</div>
       </div>
     </div>
 
@@ -244,7 +244,7 @@
     </footer>
   </div>
 
-  <aside data-notes="" class="hidden">The MediaPipe matrix is 150 frames by 78 dimensions. Per-frame spatial information alone cannot separate boredom from confusion — temporal dynamics must be encoded explicitly. The five-category pipeline does exactly that. Statistical features — 780 dimensions — give us the distribution: mean, standard deviation, extrema, quartiles, IQR, skewness and kurtosis for every one of the 78 streams. Temporal dynamics — 624 dimensions — capture velocity, acceleration, zero-crossing rate and slope. Frequency domain features — 546 dimensions — use the FFT to expose periodicity: dominant frequency, spectral centroid, spread, entropy and energy in low, mid and high bands. Interaction features — 111 dimensions — encode cross-group correlations and six state-specific ratios such as boredom ratio equals eyeBlink over eyeWide. Finally, domain-specific features — 13 dimensions — encode attention, arousal, valence, cognitive load, fatigue and four state scores. Concatenated, this gives 2,152 dimensions, which XGBoost plus LASSO then reduce to the top 500 on the next pipeline stage. The 150-frame window is what makes the temporal and frequency branches possible.</aside>
+  <aside data-notes="" class="hidden">The MediaPipe matrix is 150 frames by 78 dimensions. Per-frame spatial information alone cannot separate boredom from confusion, temporal dynamics must be encoded explicitly. The five-category pipeline does exactly that. Statistical features, 780 dimensions, give us the distribution: mean, standard deviation, extrema, quartiles, IQR, skewness and kurtosis for every one of the 78 streams. Temporal dynamics, 624 dimensions, capture velocity, acceleration, zero-crossing rate and slope. Frequency domain features, 546 dimensions, use the FFT to expose periodicity: dominant frequency, spectral centroid, spread, entropy and energy in low, mid and high bands. Interaction features, 111 dimensions, encode cross-group correlations and six state-specific ratios such as boredom ratio equals eyeBlink over eyeWide. Finally, domain-specific features, 13 dimensions, encode attention, arousal, valence, cognitive load, fatigue and four state scores. Concatenated, this gives 2,152 dimensions, which XGBoost plus LASSO then reduce to the top 500 on the next pipeline stage. The 150-frame window is what makes the temporal and frequency branches possible.</aside>
 
 
 </body></html>
